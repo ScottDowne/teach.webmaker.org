@@ -36,7 +36,8 @@ var pages = {
   'opportunities': require('../pages/opportunities.jsx'),
   'tools': require('../pages/tools.jsx'),
   'me': require('../pages/makes.jsx'),
-  'web-literacy': require('../pages/web-literacy.jsx')
+  'web-literacy': require('../pages/web-literacy.jsx'),
+  'web-literacy-skills': require('../pages/web-literacy-skills.jsx')
 };
 
 /**
