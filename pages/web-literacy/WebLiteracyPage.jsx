@@ -5,7 +5,7 @@ var Illustration = require('../../components/illustration.jsx');
 
 var webmaps = require('./webmaplisting.jsx');
 
-var CircleTree = require('../../components/circletree');
+var CircleTree = require('react-circletree/es5');
 var weblitdata = require('./weblitdata');
 var categories = require('./categories');
 var weblitcolors = require('./colors');
@@ -14,6 +14,9 @@ var WebLiteracyPage = React.createClass({
   statics: {
     pageTitle: "Web Literacy",
     pageClassName: "web-literacy"
+  },
+  onMapToggle: function(labels) {
+    console.log(labels);
   },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
@@ -29,7 +32,7 @@ var WebLiteracyPage = React.createClass({
         </section>
 
         <section className="weblit-nav">
-          <CircleTree data={weblitdata} color={weblitcolors} />
+          <CircleTree data={weblitdata} color={weblitcolors} onToggle={this.onMapToggle}/>
           <div className="c21-skills">
             <h3>21st Century Skills</h3>
             <ul>
