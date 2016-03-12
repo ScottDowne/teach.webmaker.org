@@ -18,7 +18,7 @@ var MENU_ENTRIES = [
     subItems: [
       {
         name: "21st Century Skills",
-        to: '/web-literacy-skills'
+        to: '/web-literacy/skills'
       }
     ]
   },

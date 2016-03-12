@@ -12,7 +12,7 @@ var activitydata = require('./activitydata');
 var categories = require('./categories');
 var weblitcolors = require('./colors');
 var topicContent = weblitcontent.topics;
-var skillsContent = weblitcontent.skills;
+var competenciesContent = weblitcontent.competencies;
 
 var Topic = React.createClass({
   render: function() {
@@ -21,12 +21,12 @@ var Topic = React.createClass({
     if (this.props.selectedTopic) {
       if (this.props.selectedTopic !== this.props.topic) {
         className += " hidden";
-      } else if (this.props.skills[this.props.selectedSkill]) {
-        // We're displaying a skill.
+      } else if (this.props.competencies[this.props.selectedCompetency]) {
+        // We're displaying a competency.
         content = (
           <div>
-            <span>{this.props.selectedTopic} &gt; </span><span>{this.props.selectedSkill}</span>
-            <SkillItem skill={this.props.selectedSkill}/>
+            <span>{this.props.selectedTopic} &gt; </span><span>{this.props.selectedCompetency}</span>
+            <CompetencyItem competency={this.props.selectedCompetency}/>
           </div>
         );
       } else {
@@ -42,7 +42,7 @@ var Topic = React.createClass({
               alt="">
               <p>{topicContent[this.props.topic].content}</p>
             </Illustration>
-            <span><b>Skills:</b> {Object.keys(this.props.skills).join(", ")}</span>
+            <span><b>Competencies:</b> {Object.keys(this.props.competencies).join(", ")}</span>
           </div>
         );
       }
@@ -57,7 +57,7 @@ var Topic = React.createClass({
             alt="">
             <h2>{this.props.topic}</h2>
             <p>{topicContent[this.props.topic].content}</p>
-            <span><b>Skills:</b> {Object.keys(this.props.skills).join(", ")}</span>
+            <span><b>Competencies:</b> {Object.keys(this.props.competencies).join(", ")}</span>
           </Illustration>
         </div>
       );
@@ -71,13 +71,13 @@ var Topic = React.createClass({
     );
   }
 });
-var SkillItem = React.createClass({
+var CompetencyItem = React.createClass({
   render: function() {
     return (
       <div>
-        <p>{skillsContent[this.props.skill].quote}</p>
+        <p>{competenciesContent[this.props.competency].quote}</p>
         {
-          skillsContent[this.props.skill].content.map(function(value, index) {
+          competenciesContent[this.props.competency].content.map(function(value, index) {
             return (
               <p key={index}>
                 {value}
@@ -90,62 +90,101 @@ var SkillItem = React.createClass({
   }
 });
 var Activity = React.createClass({
-  checkTopicForSkills: function() {
-    var selectedTopic = this.props.selectedTopic;
-    if (!selectedTopic) {
-      return;
-    }
-    var skills = this.props.competencies;
-    var topicSkills = Object.keys(weblitdata["WEB LITERACY"][this.props.selectedTopic]);
-    return skills.some(function(skill) {
-      return topicSkills.indexOf(skill) !== -1;
-    });
-  },
   render: function() {
-    if (this.props.competencies.indexOf(this.props.selectedSkill) !== -1 ||
-        this.checkTopicForSkills()) {
-      return (
-        <div key={this.props.name}>
-          <Illustration
-            width={200} height={200}
-            src1x={this.props.src1x}
-            src2x={this.props.src2x}
-            alt="">
-            <h2>{this.props.name}</h2>
-            <a href="">{this.props.difficulty}</a>
-            <a href="">{this.props.duration}</a>
-            <p>{this.props.content}</p>
-            <span><b>Competencies:</b> {this.props.competencies.join(", ")}</span>
-            <span><b>21C Skills:</b> {this.props.skills.join(", ")}</span>
-          </Illustration>
-        </div>
-      );
-    }
-    return (<div key={this.props.name}></div>);
+    return (
+      <Illustration
+        width={200} height={200}
+        src1x={this.props.src1x}
+        src2x={this.props.src2x}
+        alt="">
+        <h2>{this.props.name}</h2>
+        <a href="">{this.props.difficulty}</a>
+        <a href="">{this.props.duration}</a>
+        <p>{this.props.content}</p>
+        <span><b>Competencies:</b> {this.props.competencies.join(", ")}</span>
+        <span><b>21C Skills:</b> {this.props.skills.join(", ")}</span>
+      </Illustration>
+    );
   }
 });
 
-var WebLiteracyPage = React.createClass({
+module.exports = React.createClass({
   statics: {
     pageTitle: "Web Literacy",
     pageClassName: "web-literacy"
   },
+  hasCompetencyIn: function(competencies) {
+    var competency = this.state.competency;
+    if (competency && competencies.indexOf(competency) !== -1) {
+      return true;
+    }
+  },
+  hasMatchingCompetencyIn: function(competencies) {
+    var selectedTopic = this.state.topic;
+    if (!selectedTopic || this.state.competency) {
+      return false;
+    }
+    var topicCompetencies = Object.keys(weblitdata["WEB LITERACY"][selectedTopic]);
+    return competencies.some(function(competency) {
+      return topicCompetencies.indexOf(competency) !== -1;
+    });
+  },
+  renderActivities: function() {
+    var selectedTopic = this.state.topic;
+    var selectedCompetency = this.state.competency;
+    var hasCompetencyIn = this.hasCompetencyIn;
+    var hasMatchingCompetencyIn = this.hasMatchingCompetencyIn;
+
+    var activities = [];
+    activitydata.forEach(function(activity, index) {
+      if (hasCompetencyIn(activity.competencies) || hasMatchingCompetencyIn(activity.competencies)) {
+        activities.push(
+          <div key={index}>
+            <Activity
+              selectedTopic={selectedTopic}
+              selectedCompetency={selectedCompetency}
+              topic={activity.topic}
+              name={activity.name}
+              src1x="/img/pages/clubs/intro-photo.png"
+              src2x="/img/pages/clubs/intro-photo@2x.png"
+              content={activity.content}
+              duration={activity.duration}
+              difficulty={activity.difficulty}
+              competencies={activity.competencies}
+              skills={activity.skills}
+            />
+          </div>
+        );
+      }
+    });
+
+    if (!activities.length) {
+      return null;
+    } else {
+      return (
+        <div>
+          <h2>Related {selectedCompetency || selectedTopic} Activities</h2>
+          {activities}
+        </div>
+      );
+    }
+  },
   getInitialState: function() {
     return {
       topic: "",
-      skill: ""
+      competency: ""
     };
   },
   onMapToggle: function(labels) {
     this.setState({
       topic: labels[1] || "",
-      skill: labels[2] || ""
+      competency: labels[2] || ""
     });
   },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
     var selectedTopic = this.state.topic;
-    var selectedSkill = this.state.skill;
+    var selectedCompetency = this.state.competency;
     return (
       <div className="inner-container">
         <h1>Web Literacy</h1>
@@ -181,9 +220,9 @@ var WebLiteracyPage = React.createClass({
             return (
               <Topic
                 selectedTopic={selectedTopic}
-                selectedSkill={selectedSkill}
+                selectedCompetency={selectedCompetency}
                 topic={topic}
-                skills={weblitdata["WEB LITERACY"][topic]}
+                competencies={weblitdata["WEB LITERACY"][topic]}
                 src1x="/img/pages/clubs/intro-photo.png"
                 src2x="/img/pages/clubs/intro-photo@2x.png"
                 content={topicContent[topic].content}
@@ -193,26 +232,7 @@ var WebLiteracyPage = React.createClass({
         }
         </section>
         <section>
-          <h2>Related {selectedTopic} Activities</h2>
-        {
-          activitydata.map(function(activity) {
-            return (
-              <Activity
-                selectedTopic={selectedTopic}
-                selectedSkill={selectedSkill}
-                topic={activity.topic}
-                name={activity.name}
-                src1x="/img/pages/clubs/intro-photo.png"
-                src2x="/img/pages/clubs/intro-photo@2x.png"
-                content={activity.content}
-                duration={activity.duration}
-                difficulty={activity.difficulty}
-                competencies={activity.competencies}
-                skills={activity.skills}
-              />
-            );
-          })
-        }
+          {this.renderActivities()}
         </section>
         <section className="text-center">
           <div className="vertical-divider"></div>
@@ -225,5 +245,3 @@ var WebLiteracyPage = React.createClass({
     );
   }
 });
-
-module.exports = WebLiteracyPage;

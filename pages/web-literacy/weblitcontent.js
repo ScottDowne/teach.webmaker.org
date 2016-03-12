@@ -10,7 +10,7 @@ module.exports = {
       content: "Participating on the open web includes connecting with the communities that share, build, and sustain meaningful content online. A healthy online community requires knowledge of how to create, publish and link content, and an understanding of security in order to keep content, identity, and systems safe."
     }
   },
-  skills: {
+  competencies: {
     Design: {
       quote: "Creating mental and physical representations of digital content focused on accessibility and approachability.",
       content: [
