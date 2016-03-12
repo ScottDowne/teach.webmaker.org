@@ -17,16 +17,18 @@ var competenciesContent = weblitcontent.competencies;
 var Topic = React.createClass({
   render: function() {
     var className = "topic-item";
-    var content = "";
+    var content = null;
     if (this.props.selectedTopic) {
       if (this.props.selectedTopic !== this.props.topic) {
         className += " hidden";
       } else if (this.props.competencies[this.props.selectedCompetency]) {
+        className += " active";
         // We're displaying a competency.
         content = (
           <div>
-            <span>{this.props.selectedTopic} &gt; </span><span>{this.props.selectedCompetency}</span>
+            <h2><span className="lighten">{this.props.selectedTopic} &rsaquo;</span> {this.props.selectedCompetency}</h2>
             <CompetencyItem competency={this.props.selectedCompetency}/>
+            <div><b>21C Skills:</b> {weblitdata["WEB LITERACY"][this.props.selectedTopic][this.props.selectedCompetency].join(", ")}</div>
           </div>
         );
       } else {
@@ -74,12 +76,12 @@ var Topic = React.createClass({
 var CompetencyItem = React.createClass({
   render: function() {
     return (
-      <div>
-        <p>{competenciesContent[this.props.competency].quote}</p>
+      <div className="competency-item">
+        <h3 className="competency-quote">{competenciesContent[this.props.competency].quote}</h3>
         {
           competenciesContent[this.props.competency].content.map(function(value, index) {
             return (
-              <p key={index}>
+              <p className="competency-paragraph" key={index}>
                 {value}
               </p>
             );
@@ -98,11 +100,11 @@ var Activity = React.createClass({
         src2x={this.props.src2x}
         alt="">
         <h2>{this.props.name}</h2>
-        <a href="">{this.props.difficulty}</a>
+        <a className="difficulty-link" href="">{this.props.difficulty}</a>
         <a href="">{this.props.duration}</a>
         <p>{this.props.content}</p>
-        <span><b>Competencies:</b> {this.props.competencies.join(", ")}</span>
-        <span><b>21C Skills:</b> {this.props.skills.join(", ")}</span>
+        <div><b>Competencies:</b> {this.props.competencies.join(", ")}</div>
+        <div><b>21C Skills:</b> {this.props.skills.join(", ")}</div>
       </Illustration>
     );
   }
@@ -139,7 +141,7 @@ module.exports = React.createClass({
     activitydata.forEach(function(activity, index) {
       if (hasCompetencyIn(activity.competencies) || hasMatchingCompetencyIn(activity.competencies)) {
         activities.push(
-          <div key={index}>
+          <div className="activity-item" key={index}>
             <Activity
               selectedTopic={selectedTopic}
               selectedCompetency={selectedCompetency}
@@ -186,35 +188,36 @@ module.exports = React.createClass({
     var selectedTopic = this.state.topic;
     var selectedCompetency = this.state.competency;
     return (
-      <div className="inner-container">
-        <h1>Web Literacy</h1>
+      <div>
+        <div className="inner-container">
+          <h1>Web Literacy</h1>
 
-        <section className="intro">
-          <p>
-            A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
-            by selecting what you want to learn more about, to see definitions and activities.
-          </p>
-        </section>
+          <section className="intro">
+            <p>
+              A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
+              by selecting what you want to learn more about, to see definitions and activities.
+            </p>
+          </section>
 
-        <section className="weblit-nav">
-          <CircleTree data={weblitdata} color={weblitcolors} onToggle={this.onMapToggle}/>
-          <div className="c21-skills">
-            <h3>21st Century Skills</h3>
-            <ul>
-            {
-              Object.keys(categories).map(function(cat) {
-                return (
-                  <li className={cat} key={cat}>
-                  <span className="icon">[☺]</span>
-                  { categories[cat] }
-                  </li>
-                );
-              })
-            }
-            </ul>
-          </div>
-        </section>
-        <section>
+          <section className="weblit-nav">
+            <CircleTree data={weblitdata} color={weblitcolors} onToggle={this.onMapToggle}/>
+            <div className="c21-skills">
+              <h3>21st Century Skills</h3>
+              <ul>
+              {
+                Object.keys(categories).map(function(cat) {
+                  return (
+                    <li className={cat} key={cat}>
+                    <span className="icon">[☺]</span>
+                    { categories[cat] }
+                    </li>
+                  );
+                })
+              }
+              </ul>
+            </div>
+          </section>
+        </div>
         {
           Object.keys(weblitdata["WEB LITERACY"]).map(function(topic) {
             return (
@@ -230,17 +233,18 @@ module.exports = React.createClass({
             );
           })
         }
-        </section>
-        <section>
-          {this.renderActivities()}
-        </section>
-        <section className="text-center">
-          <div className="vertical-divider"></div>
-          <h3 className="text-center">Read our whitepaper on why Mozilla cares about Web Literacy.</h3>
-          <OutboundLink to={whitepaperLink} eventLabel={whitepaperLink} className="btn btn-awsm">
-            Read whitepaper <i className="fa fa-external-link"></i>
-          </OutboundLink>
-        </section>
+        <div className="inner-container">
+          <section>
+            {this.renderActivities()}
+          </section>
+          <section className="text-center">
+            <div className="vertical-divider"></div>
+            <h3 className="text-center">Read our whitepaper on why Mozilla cares about Web Literacy.</h3>
+            <OutboundLink to={whitepaperLink} eventLabel={whitepaperLink} className="btn btn-awsm">
+              Read whitepaper <i className="fa fa-external-link"></i>
+            </OutboundLink>
+          </section>
+        </div>
       </div>
     );
   }
