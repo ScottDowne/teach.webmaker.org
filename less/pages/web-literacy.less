@@ -12,6 +12,20 @@
       margin-bottom: 0;
     }
   }
+  .illustration {
+    @media screen and (min-width: @screen-sm-min) {
+      padding-top: 8px;
+      align-items: stretch;
+      .image-container {
+        margin-top: 10px;
+      }
+      .content-container {
+        h2 {
+          margin-top: 0;
+        }
+      }
+    }
+  }
   .topic-item {
     .lighten {
       opacity: .5;
@@ -20,6 +34,7 @@
     padding: 2rem 6.5rem;
     &.active {
       background: #EEE;
+      padding-bottom: 40px;
     }
   }
   .activity-item {

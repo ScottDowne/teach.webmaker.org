@@ -20,15 +20,15 @@ module.exports = React.createClass({
         <div className="inner-container activities">
           <section>
             <p>
-              Start teaching others how to read, write and participate on the web with these free activities created by teachers, educators and technologists like you. Each featured activity includes step-by-step instructions and has been tested in schools, afterschool programs, libraries and community centers around the globe. Whether learning how to code, understanding why privacy matters, or creating openly-licensed web content, we believe teaching the web should be fun and engaging!
+              As people learn to read, write, and participate on the web, a cross-cutting set of 21C Skills emerge as skills critical to success in today’s world. They enable individuals to become teachers, advocates, and community leaders to leverage and advance the web as an open and public resource. The following 21C Skills correspond to the specific web literacy skills indicated below:
             </p>
             {
               skills.map(function(skill) {
                 return (
                   <Illustration
                     width={200} height={200}
-                    src1x="/img/pages/clubs/intro-photo.png"
-                    src2x="/img/pages/clubs/intro-photo@2x.png"
+                    src1x={skill.imgSrc1x}
+                    src2x={skill.imgSrc2x}
                     alt="">
                     <h2>{skill.name}</h2>
                     <p>{skill.content}</p>

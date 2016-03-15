@@ -1,13 +1,16 @@
 module.exports = {
   topics: {
     Read: {
-      content: "Reading on the web is a critical skill for engaging content online. They can be viewed as “exploring,” or “navigating the web.” Just as traditional reading requires knowledge of the text and concepts of print, reading online requires a basic understanding of web mechanics."
+      content: "Reading on the web is a critical skill for engaging content online. They can be viewed as “exploring,” or “navigating the web.” Just as traditional reading requires knowledge of the text and concepts of print, reading online requires a basic understanding of web mechanics.",
+      imgSrc1x: "/img/pages/web-literacy/web-lit-icon_read.svg"
     },
     Write: {
-      content: "Writing on the web enables one to build and create content to make meaning.  New genres that blend texts and tools have emerged on the open web and are often referred to as making. Learning through making involves constructing new content."
+      content: "Writing on the web enables one to build and create content to make meaning.  New genres that blend texts and tools have emerged on the open web and are often referred to as making. Learning through making involves constructing new content.",
+      imgSrc1x: "/img/pages/web-literacy/web-lit-icon_write.svg"
     },
     Participate: {
-      content: "Participating on the open web includes connecting with the communities that share, build, and sustain meaningful content online. A healthy online community requires knowledge of how to create, publish and link content, and an understanding of security in order to keep content, identity, and systems safe."
+      content: "Participating on the open web includes connecting with the communities that share, build, and sustain meaningful content online. A healthy online community requires knowledge of how to create, publish and link content, and an understanding of security in order to keep content, identity, and systems safe.",
+      imgSrc1x: "/img/pages/web-literacy/web-lit-icon_participate.svg"
     }
   },
   competencies: {

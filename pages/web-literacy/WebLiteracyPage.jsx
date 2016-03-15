@@ -226,8 +226,8 @@ module.exports = React.createClass({
                 selectedCompetency={selectedCompetency}
                 topic={topic}
                 competencies={weblitdata["WEB LITERACY"][topic]}
-                src1x="/img/pages/clubs/intro-photo.png"
-                src2x="/img/pages/clubs/intro-photo@2x.png"
+                src1x={topicContent[topic].imgSrc1x}
+                src2x={topicContent[topic].imgSrc2x}
                 content={topicContent[topic].content}
               />
             );
