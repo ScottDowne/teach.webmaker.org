@@ -88,7 +88,9 @@ var redirectElements = Object.keys(redirects).map(function(path) {
 var routes = (
   <Route path='/' component={require('../components/page.jsx')} >
     <IndexRoute component={require('../pages/home.jsx')} />
-    <Route path="/web-literacy(/:verb)(/:competency)" component={require('../pages/web-literacy.jsx')}/>
+    <Route path="web-literacy" component={require('../pages/web-literacy.jsx')}>
+      <Route path=":verb(/:competency)" component={require('../pages/web-literacy.jsx')}/>
+    </Route>
     {routeElements}
     {redirectElements}
   </Route>
