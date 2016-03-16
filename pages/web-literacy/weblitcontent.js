@@ -15,6 +15,7 @@ module.exports = {
   },
   competencies: {
     Design: {
+      topic: "Write",
       quote: "Creating mental and physical representations of digital content focused on accessibility and approachability.",
       content: [
         "Organizing visual aesthetics and user experiences by using mockups, wireframes or pencil sketches/maps of digital content to be built.", 
@@ -25,6 +26,7 @@ module.exports = {
       ]
     },
     Code: {
+      topic: "Write",
       quote: "Understanding basic principles, purpose, and applications of coding and programming languages.",
       content: [
         "Implementing models to think computationally while problem-solving.",
@@ -35,6 +37,7 @@ module.exports = {
       ]
     },
     Compose: {
+      topic: "Write",
       quote: "Building, organizing, and sharing digital content that is accessible and approachable.",
       content: [
         "Curating digital content and organizing it into a system for building and sharing.",
@@ -46,6 +49,7 @@ module.exports = {
       ]
     },
     Revise: {
+      topic: "Write",
       quote: "Systematically reviewing and examining digital content with the intent of improving work process and product. ",
       content: [
         "Systematically reviewing digital content for the purpose or intention of improving content created.",
@@ -56,6 +60,7 @@ module.exports = {
       ]
     },
     Remix: {
+      topic: "Write",
       quote: "Encoding (production of message) and decoding (comprehension and interpretation of message) meaning in digital content by constructing, redesigning, and reinventing online texts.",
       content: [
         "Identifying openly-licensed work that can be used for remix.",
@@ -66,6 +71,7 @@ module.exports = {
       ]
     },
     Evaluate: {
+      topic: "Read",
       quote: "Comparing and evaluating information from a number of sources online to test credibility and relevance.",
       content: [
         "Comparing and contrasting information from a number of sources.",
@@ -76,6 +82,7 @@ module.exports = {
       ]
     },
     Synthesize: {
+      topic: "Read",
       quote: "Integrating separate and unique information from multiple online sources.",
       content: [
         "Coalescing information shared on one webpage to make meaning.",
@@ -84,6 +91,7 @@ module.exports = {
       ]
     },
     Navigate: {
+      topic: "Read",
       quote: "Understanding the basic structure of the web and being able to understand how this affects reading online.",
       content: [
         "Accessing the web using the common features of a web service.",
@@ -94,6 +102,7 @@ module.exports = {
       ]
     },
     Search: {
+      topic: "Read",
       quote: "Using questions and keywords to find the information you need.",
       content: [
         "Using and revising keywords to make web searches to find information more efficiently.",
@@ -104,6 +113,7 @@ module.exports = {
       ]
     },
     Connect: {
+      topic: "Participate",
       quote: "Extending thinking beyond the individual learner to integrate social networks and tools in problem-solving.",
       content: [
         "Engaging with online communities at varying levels of activity.",
@@ -114,6 +124,7 @@ module.exports = {
       ]
     },
     Protect: {
+      topic: "Participate",
       quote: "Managing and maintaining the privacy and security of your digital identity through behaviors and digital tool settings.",
       content: [
         "Examining and understanding the consequences of sharing data online.",
@@ -124,6 +135,7 @@ module.exports = {
       ]
     },
     Share: {
+      topic: "Participate",
       quote: "Giving others access to files or digital content in an online space while respecting copyright and licenses.",
       content: [
         "Creating and using a system to distribute web resources to others.",
@@ -134,6 +146,7 @@ module.exports = {
       ]
     },
     "Open Practice": {
+      topic: "Participate",
       quote: "Using and contributing web resources to keep the web transparent and universally accessible to all.",
       content: [
         "Distinguishing between open and closed licensing.",
@@ -143,6 +156,7 @@ module.exports = {
       ]
     },
     Contribute: {
+      topic: "Participate",
       quote: "A group of local or global learners who reach a common outcome while connecting and learning online.",
       content: [
         "Choosing a web tool in order to collaborate with others.",

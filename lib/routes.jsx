@@ -37,6 +37,23 @@ var pages = {
   'tools': require('../pages/tools.jsx'),
   'me': require('../pages/makes.jsx'),
   'web-literacy': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate/Connect': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate/Protect': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate/Open%20Practice': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate/Contribute': require('../pages/web-literacy.jsx'),
+  'web-literacy/Participate/Share': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write/Design': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write/Code': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write/Compose': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write/Revise': require('../pages/web-literacy.jsx'),
+  'web-literacy/Write/Remix': require('../pages/web-literacy.jsx'),
+  'web-literacy/Read': require('../pages/web-literacy.jsx'),
+  'web-literacy/Read/Search': require('../pages/web-literacy.jsx'),
+  'web-literacy/Read/Navigate': require('../pages/web-literacy.jsx'),
+  'web-literacy/Read/Synthesize': require('../pages/web-literacy.jsx'),
+  'web-literacy/Read/Evaluate': require('../pages/web-literacy.jsx'),
   'web-literacy/skills': require('../pages/web-literacy-skills.jsx')
 };
 

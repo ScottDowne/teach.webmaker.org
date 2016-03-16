@@ -1,5 +1,8 @@
 var React = require('react');
 var OutboundLink = require('react-ga').OutboundLink;
+var ReactRouter = require('react-router');
+var History = ReactRouter.History;
+var Link = ReactRouter.Link;
 
 var Illustration = require('../../components/illustration.jsx');
 
@@ -13,6 +16,31 @@ var categories = require('./categories');
 var weblitcolors = require('./colors');
 var topicContent = weblitcontent.topics;
 var competenciesContent = weblitcontent.competencies;
+
+function makeLinksFromCompetencies(competencies) {
+  return (
+    <span>
+    {
+      competencies.map(function(competency, index) {
+        var comma = "";
+        if (index+1 < competencies.length) {
+          comma = ", ";
+        }
+        return (
+          <span>
+            <Link key={competency}
+              to={"/web-literacy/" + competenciesContent[competency].topic + "/" + competency + "/"}
+            >
+              {competency}
+            </Link>
+            {comma}
+          </span>
+        );
+      })
+    }
+    </span>
+  );
+}
 
 var Topic = React.createClass({
   render: function() {
@@ -44,7 +72,7 @@ var Topic = React.createClass({
               alt="">
               <p>{topicContent[this.props.topic].content}</p>
             </Illustration>
-            <span><b>Competencies:</b> {Object.keys(this.props.competencies).join(", ")}</span>
+            <span><b>Competencies:</b> {makeLinksFromCompetencies(Object.keys(this.props.competencies))}</span>
           </div>
         );
       }
@@ -59,7 +87,7 @@ var Topic = React.createClass({
             alt="">
             <h2>{this.props.topic}</h2>
             <p>{topicContent[this.props.topic].content}</p>
-            <span><b>Competencies:</b> {Object.keys(this.props.competencies).join(", ")}</span>
+            <span><b>Competencies:</b> {makeLinksFromCompetencies(Object.keys(this.props.competencies))}</span>
           </Illustration>
         </div>
       );
@@ -103,7 +131,7 @@ var Activity = React.createClass({
         <a className="difficulty-link" href="">{this.props.difficulty}</a>
         <a href="">{this.props.duration}</a>
         <p>{this.props.content}</p>
-        <div><b>Competencies:</b> {this.props.competencies.join(", ")}</div>
+        <div><b>Competencies:</b> {makeLinksFromCompetencies(this.props.competencies)}</div>
         <div><b>21C Skills:</b> {this.props.skills.join(", ")}</div>
       </Illustration>
     );
@@ -111,9 +139,20 @@ var Activity = React.createClass({
 });
 
 module.exports = React.createClass({
+  mixins: [History],
   statics: {
     pageTitle: "Web Literacy",
     pageClassName: "web-literacy"
+  },
+  componentDidMount: function() {
+    var pathname = decodeURIComponent(window.location.pathname);
+    var urlSplit = pathname.split("/");
+    var verb = urlSplit[2];
+    var competency = urlSplit[3];
+    this.setState({
+      topic: verb || "",
+      competency: competency || ""
+    });
   },
   hasCompetencyIn: function(competencies) {
     var competency = this.state.competency;
@@ -171,6 +210,23 @@ module.exports = React.createClass({
       );
     }
   },
+  hasCategory: function(cat) {
+    var cat = categories[cat];
+    var selectedVerb = this.state.topic;
+    var selectedCompetency = this.state.competency;
+
+    if (!selectedVerb) {
+      return true;
+    }
+
+    if (!selectedCompetency) {
+      return Object.keys(weblitdata["WEB LITERACY"][selectedVerb]).some(function(item) {
+        return weblitdata["WEB LITERACY"][selectedVerb][item].indexOf(cat) !== -1;
+      });
+    }
+
+    return weblitdata["WEB LITERACY"][selectedVerb][selectedCompetency].indexOf(cat) !== -1;
+  },
   getInitialState: function() {
     return {
       topic: "",
@@ -178,15 +234,26 @@ module.exports = React.createClass({
     };
   },
   onMapToggle: function(labels) {
+    var verb =  labels[1] || "";
+    var competency = labels[2] || "";
+    var url = "/web-literacy/";
+    if (verb) {
+      url += verb + "/";
+      if (competency) {
+        url += competency + "/";
+      }
+    }
+    this.history.pushState(null, url);
     this.setState({
-      topic: labels[1] || "",
-      competency: labels[2] || ""
+      topic: verb,
+      competency: competency
     });
   },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
     var selectedTopic = this.state.topic;
     var selectedCompetency = this.state.competency;
+    var hasCategory = this.hasCategory;
     return (
       <div>
         <div className="inner-container">
@@ -206,8 +273,12 @@ module.exports = React.createClass({
               <ul>
               {
                 Object.keys(categories).map(function(cat) {
+                  var className = cat;
+                  if (hasCategory(cat)) {
+                    className += " active-skill";
+                  }
                   return (
-                    <li className={cat} key={cat}>
+                    <li className={className} key={cat}>
                     <span className="icon">[☺]</span>
                     { categories[cat] }
                     </li>

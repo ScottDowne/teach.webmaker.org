@@ -153,18 +153,22 @@
           & + li {
             margin-top: 1em;
           }
+          opacity: .5;
 
-          &.PS {
-            background: @problemsolving;
-          }
-          &.Com {
-            background: @communication;
-          }
-          &.Cre {
-            background: @creativity;
-          }
-          &.Col {
-            background: @collaboration;
+          &.active-skill {
+            opacity: 1;
+            &.PS {
+              background: @problemsolving;
+            }
+            &.Com {
+              background: @communication;
+            }
+            &.Cre {
+              background: @creativity;
+            }
+            &.Col {
+              background: @collaboration;
+            }
           }
         }
       }
