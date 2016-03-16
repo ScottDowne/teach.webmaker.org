@@ -89,7 +89,9 @@ var routes = (
   <Route path='/' component={require('../components/page.jsx')} >
     <IndexRoute component={require('../pages/home.jsx')} />
     <Route path="web-literacy" component={require('../pages/web-literacy.jsx')}>
-      <Route path=":verb(/:competency)" component={require('../pages/web-literacy.jsx')}/>
+      <Route path=":verb" component={require('../pages/web-literacy.jsx')}>
+        <Route path=":competency" component={require('../pages/web-literacy.jsx')}/>
+      </Route>
     </Route>
     {routeElements}
     {redirectElements}
