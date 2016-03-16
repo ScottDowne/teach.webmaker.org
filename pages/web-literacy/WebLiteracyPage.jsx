@@ -144,7 +144,7 @@ module.exports = React.createClass({
     pageTitle: "Web Literacy",
     pageClassName: "web-literacy"
   },
-  componentDidMount: function() {
+  updateMapNavState: function() {
     var pathname = decodeURIComponent(window.location.pathname);
     var urlSplit = pathname.split("/");
     var verb = urlSplit[2];
@@ -153,6 +153,12 @@ module.exports = React.createClass({
       topic: verb || "",
       competency: competency || ""
     });
+  },
+  componentWillReceiveProps: function() {
+    this.updateMapNavState();
+  },
+  componentDidMount: function() {
+    this.updateMapNavState();
   },
   hasCompetencyIn: function(competencies) {
     var competency = this.state.competency;
@@ -244,10 +250,6 @@ module.exports = React.createClass({
       }
     }
     this.history.pushState(null, url);
-    this.setState({
-      topic: verb,
-      competency: competency
-    });
   },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
