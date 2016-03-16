@@ -9,38 +9,15 @@ var Illustration = require('../../components/illustration.jsx');
 var webmaps = require('./webmaplisting.jsx');
 
 var CircleTree = require('react-circletree/es5');
-var weblitdata = require('./weblitdata');
+var weblitdataroot = require('./weblitdata');
+var weblitdata = weblitdataroot["WEB LITERACY"];
 var weblitcontent = require('./weblitcontent');
 var activitydata = require('./activitydata');
 var categories = require('./categories');
 var weblitcolors = require('./colors');
 var topicContent = weblitcontent.topics;
 var competenciesContent = weblitcontent.competencies;
-
-function makeLinksFromCompetencies(competencies) {
-  return (
-    <span>
-    {
-      competencies.map(function(competency, index) {
-        var comma = "";
-        if (index+1 < competencies.length) {
-          comma = ", ";
-        }
-        return (
-          <span>
-            <Link key={competency}
-              to={"/web-literacy/" + competenciesContent[competency].topic + "/" + competency + "/"}
-            >
-              {competency}
-            </Link>
-            {comma}
-          </span>
-        );
-      })
-    }
-    </span>
-  );
-}
+var makeLinksFromCompetencies = require("./MakeLinksFromCompetencies.jsx");
 
 var Topic = React.createClass({
   render: function() {
@@ -56,7 +33,7 @@ var Topic = React.createClass({
           <div>
             <h2><span className="lighten">{this.props.selectedTopic} &rsaquo;</span> {this.props.selectedCompetency}</h2>
             <CompetencyItem competency={this.props.selectedCompetency}/>
-            <div><b>21C Skills:</b> {weblitdata["WEB LITERACY"][this.props.selectedTopic][this.props.selectedCompetency].join(", ")}</div>
+            <div><b>21C Skills:</b> <Link to="/web-literacy/skills">{weblitdata[this.props.selectedTopic][this.props.selectedCompetency].join(", ")}</Link></div>
           </div>
         );
       } else {
@@ -132,7 +109,7 @@ var Activity = React.createClass({
         <a href="">{this.props.duration}</a>
         <p>{this.props.content}</p>
         <div><b>Competencies:</b> {makeLinksFromCompetencies(this.props.competencies)}</div>
-        <div><b>21C Skills:</b> {this.props.skills.join(", ")}</div>
+        <div><b>21C Skills:</b> <Link to="web-literacy/skills">{this.props.skills.join(", ")}</Link></div>
       </Illustration>
     );
   }
@@ -171,7 +148,7 @@ module.exports = React.createClass({
     if (!selectedTopic || this.state.competency) {
       return false;
     }
-    var topicCompetencies = Object.keys(weblitdata["WEB LITERACY"][selectedTopic]);
+    var topicCompetencies = Object.keys(weblitdata[selectedTopic]);
     return competencies.some(function(competency) {
       return topicCompetencies.indexOf(competency) !== -1;
     });
@@ -226,12 +203,12 @@ module.exports = React.createClass({
     }
 
     if (!selectedCompetency) {
-      return Object.keys(weblitdata["WEB LITERACY"][selectedVerb]).some(function(item) {
-        return weblitdata["WEB LITERACY"][selectedVerb][item].indexOf(cat) !== -1;
+      return Object.keys(weblitdata[selectedVerb]).some(function(item) {
+        return weblitdata[selectedVerb][item].indexOf(cat) !== -1;
       });
     }
 
-    return weblitdata["WEB LITERACY"][selectedVerb][selectedCompetency].indexOf(cat) !== -1;
+    return weblitdata[selectedVerb][selectedCompetency].indexOf(cat) !== -1;
   },
   getInitialState: function() {
     return {
@@ -269,7 +246,7 @@ module.exports = React.createClass({
           </section>
 
           <section className="weblit-nav">
-            <CircleTree data={weblitdata} color={weblitcolors} onToggle={this.onMapToggle}/>
+            <CircleTree data={weblitdataroot} color={weblitcolors} onToggle={this.onMapToggle}/>
             <div className="c21-skills">
               <h3>21st Century Skills</h3>
               <ul>
@@ -292,13 +269,13 @@ module.exports = React.createClass({
           </section>
         </div>
         {
-          Object.keys(weblitdata["WEB LITERACY"]).map(function(topic) {
+          Object.keys(weblitdata).map(function(topic) {
             return (
               <Topic
                 selectedTopic={selectedTopic}
                 selectedCompetency={selectedCompetency}
                 topic={topic}
-                competencies={weblitdata["WEB LITERACY"][topic]}
+                competencies={weblitdata[topic]}
                 src1x={topicContent[topic].imgSrc1x}
                 src2x={topicContent[topic].imgSrc2x}
                 content={topicContent[topic].content}
