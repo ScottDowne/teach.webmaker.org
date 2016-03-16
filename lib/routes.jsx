@@ -36,24 +36,6 @@ var pages = {
   'opportunities': require('../pages/opportunities.jsx'),
   'tools': require('../pages/tools.jsx'),
   'me': require('../pages/makes.jsx'),
-  'web-literacy': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate/Connect': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate/Protect': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate/Open%20Practice': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate/Contribute': require('../pages/web-literacy.jsx'),
-  'web-literacy/Participate/Share': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write/Design': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write/Code': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write/Compose': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write/Revise': require('../pages/web-literacy.jsx'),
-  'web-literacy/Write/Remix': require('../pages/web-literacy.jsx'),
-  'web-literacy/Read': require('../pages/web-literacy.jsx'),
-  'web-literacy/Read/Search': require('../pages/web-literacy.jsx'),
-  'web-literacy/Read/Navigate': require('../pages/web-literacy.jsx'),
-  'web-literacy/Read/Synthesize': require('../pages/web-literacy.jsx'),
-  'web-literacy/Read/Evaluate': require('../pages/web-literacy.jsx'),
   'web-literacy/skills': require('../pages/web-literacy-skills.jsx')
 };
 
@@ -68,6 +50,25 @@ var redirects = {
 
 // aggregate all paths used in the app
 var urls = ['/'];
+urls = urls.concat(['web-literacy',
+  'web-literacy/Participate',
+  'web-literacy/Participate/Connect',
+  'web-literacy/Participate/Protect',
+  'web-literacy/Participate/Open Practice',
+  'web-literacy/Participate/Contribute',
+  'web-literacy/Participate/Share',
+  'web-literacy/Write',
+  'web-literacy/Write/Design',
+  'web-literacy/Write/Code',
+  'web-literacy/Write/Compose',
+  'web-literacy/Write/Revise',
+  'web-literacy/Write/Remix',
+  'web-literacy/Read',
+  'web-literacy/Read/Search',
+  'web-literacy/Read/Navigate',
+  'web-literacy/Read/Synthesize',
+  'web-literacy/Read/Evaluate']);
+
 urls = urls.concat( Object.keys(pages)     );
 urls = urls.concat( Object.keys(redirects) );
 // remove duplicates. Just in case.
@@ -87,6 +88,7 @@ var redirectElements = Object.keys(redirects).map(function(path) {
 var routes = (
   <Route path='/' component={require('../components/page.jsx')} >
     <IndexRoute component={require('../pages/home.jsx')} />
+    <Route path="/web-literacy(/:verb)(/:competency)" component={require('../pages/web-literacy.jsx')}/>
     {routeElements}
     {redirectElements}
   </Route>

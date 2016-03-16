@@ -105,8 +105,8 @@ var Activity = React.createClass({
         src2x={this.props.src2x}
         alt="">
         <h2>{this.props.name}</h2>
-        <a className="difficulty-link" href="">{this.props.difficulty}</a>
-        <a href="">{this.props.duration}</a>
+        <span className="difficulty-link"><i className="fa fa-users"></i>{this.props.difficulty}</span>
+        <span><i className="fa fa-clock-o"></i>{this.props.duration}</span>
         <p>{this.props.content}</p>
         <div><b>Competencies:</b> {makeLinksFromCompetencies(this.props.competencies)}</div>
         <div><b>21C Skills:</b> <Link to="web-literacy/skills">{this.props.skills.join(", ")}</Link></div>
@@ -122,16 +122,16 @@ module.exports = React.createClass({
     pageClassName: "web-literacy"
   },
   updateMapNavState: function() {
-    var pathname = decodeURIComponent(window.location.pathname);
-    var urlSplit = pathname.split("/");
-    var verb = urlSplit[2];
-    var competency = urlSplit[3];
-    this.setState({
-      topic: verb || "",
-      competency: competency || ""
-    });
+    var topic = this.props.params.verb || "";
+    var competency = this.props.params.competency || "";
+    if (this.state.topic !== topic || this.state.competency !== competency) {
+      this.setState({
+        topic: topic,
+        competency: competency
+      });
+    }
   },
-  componentWillReceiveProps: function() {
+  componentDidUpdate: function() {
     this.updateMapNavState();
   },
   componentDidMount: function() {
