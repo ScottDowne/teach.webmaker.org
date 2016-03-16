@@ -36,6 +36,22 @@
       background: #EEE;
       padding-bottom: 40px;
     }
+    @media screen and (min-width: @screen-sm-min) {
+      &.active {
+        .illustration {
+          align-items: center;
+          .content-container {
+            p {
+              border-left: solid 1px rgba(0, 0, 0, 0.1);
+              padding-left: 30px;
+            }
+          }
+          .image-container {
+            margin-top: 0;
+          }
+        }
+      }
+    }
   }
   .activity-item {
     .difficulty-link {
