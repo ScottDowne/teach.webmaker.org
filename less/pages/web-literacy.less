@@ -83,10 +83,10 @@
     justify-content: space-around;
     align-items: center;
 
-    @problemsolving: #F1E5F0;
-    @communication: #FEFAE1;
-    @collaboration: #EEF5E8;
-    @creativity: #E2F3FA;
+    @problemsolving: #793575;
+    @communication: #FAE695;
+    @collaboration: #8BCA6C;
+    @creativity: #136BB3;
 
     .circletree {
       width: 60%;
@@ -148,10 +148,27 @@
           padding: 0.5rem;
           border-radius: 5px;
 
-          .icon {
-            font-family: monospace;
-            font-weight: 900;
-            margin-right: 0.5rem;
+          .custom-checkbox-container {
+            position: relative;
+            .fa-check {
+              opacity: 0;
+              color: #FFFFFF;
+            }
+            .checkbox-input {
+              position: absolute;
+              top: 0;
+              left: 0;
+              opacity: 0;
+              width: 16px;
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              &:checked + .checkbox-label {
+                .fa-check {
+                  opacity: 1;
+                }
+              }
+            }
           }
 
           & + li {
@@ -161,16 +178,16 @@
 
           &.active-skill {
             opacity: 1;
-            &.PS {
+            &.PS .custom-checkbox-container .custom-checkbox {
               background: @problemsolving;
             }
-            &.Com {
+            &.Com .custom-checkbox-container .custom-checkbox {
               background: @communication;
             }
-            &.Cre {
+            &.Cre .custom-checkbox-container .custom-checkbox {
               background: @creativity;
             }
-            &.Col {
+            &.Col .custom-checkbox-container .custom-checkbox {
               background: @collaboration;
             }
           }

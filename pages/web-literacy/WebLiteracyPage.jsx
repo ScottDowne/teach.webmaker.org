@@ -124,11 +124,15 @@ module.exports = React.createClass({
   updateMapNavState: function() {
     var topic = this.props.params.verb || "";
     var webLitSkill = this.props.params.webLitSkill || "";
+    var state = {};
+    var hasCategory = this.hasCategory;
     if (this.state.topic !== topic || this.state.webLitSkill !== webLitSkill) {
-      this.setState({
-        topic: topic,
-        webLitSkill: webLitSkill
+      Object.keys(categories).map(function(cat) {
+        state[cat + "-checked"] = hasCategory(cat, topic, webLitSkill);
       });
+      state.topic = topic;
+      state.webLitSkill = webLitSkill;
+      this.setState(state);
     }
   },
   componentDidUpdate: function() {
@@ -193,10 +197,8 @@ module.exports = React.createClass({
       );
     }
   },
-  hasCategory: function(cat) {
+  hasCategory: function(cat, selectedVerb, selectedWebLitSkill) {
     var cat = categories[cat];
-    var selectedVerb = this.state.topic;
-    var selectedWebLitSkill = this.state.webLitSkill;
 
     if (!selectedVerb) {
       return true;
@@ -211,10 +213,14 @@ module.exports = React.createClass({
     return weblitdata[selectedVerb][selectedWebLitSkill].indexOf(cat) !== -1;
   },
   getInitialState: function() {
-    return {
+    var state = {
       topic: "",
       webLitSkill: ""
     };
+    Object.keys(categories).map(function(cat) {
+      state[cat + "-checked"] = false;
+    });
+    return state;
   },
   onMapToggle: function(labels) {
     var verb =  labels[1] || "";
@@ -228,11 +234,18 @@ module.exports = React.createClass({
     }
     this.history.pushState(null, url);
   },
+  skillCheckboxUpdated: function(checkbox, checked) {
+    var state = {};
+    state[checkbox] = checked;
+    this.setState(state);
+  },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
     var selectedTopic = this.state.topic;
     var selectedWebLitSkill = this.state.webLitSkill;
     var hasCategory = this.hasCategory;
+    var state = this.state;
+    var skillCheckboxUpdated = this.skillCheckboxUpdated;
     return (
       <div>
         <div className="inner-container">
@@ -249,13 +262,24 @@ module.exports = React.createClass({
               {
                 Object.keys(categories).map(function(cat) {
                   var className = cat;
-                  if (hasCategory(cat)) {
+                  var checked = false;
+                  if (hasCategory(cat, selectedTopic, selectedWebLitSkill)) {
                     className += " active-skill";
+                    checked = state[cat + "-checked"];
                   }
                   return (
                     <li className={className} key={cat}>
-                    <span className="icon">[☺]</span>
-                    { categories[cat] }
+                      <span className="custom-checkbox-container">
+                        <input onChange={function() {
+                          skillCheckboxUpdated(cat + "-checked", !checked);
+                        }} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
+                        <label className="checkbox-label" htmlFor={cat + "-checkbox"}>
+                          <span className="custom-checkbox">
+                            <i className="fa fa-check"></i>
+                          </span>
+                          { categories[cat] }
+                        </label>
+                      </span>
                     </li>
                   );
                 })
