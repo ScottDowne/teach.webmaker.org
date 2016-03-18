@@ -141,6 +141,16 @@ module.exports = React.createClass({
   componentDidMount: function() {
     this.updateMapNavState();
   },
+  getInitialState: function() {
+    var state = {
+      topic: "",
+      webLitSkill: ""
+    };
+    Object.keys(categories).map(function(cat) {
+      state[cat + "-checked"] = true;
+    });
+    return state;
+  },
   hasWebLitSkillIn: function(webLitSkills) {
     var webLitSkill = this.state.webLitSkill;
     if (webLitSkill && webLitSkills.indexOf(webLitSkill) !== -1) {
@@ -211,16 +221,6 @@ module.exports = React.createClass({
     }
 
     return weblitdata[selectedVerb][selectedWebLitSkill].indexOf(cat) !== -1;
-  },
-  getInitialState: function() {
-    var state = {
-      topic: "",
-      webLitSkill: ""
-    };
-    Object.keys(categories).map(function(cat) {
-      state[cat + "-checked"] = false;
-    });
-    return state;
   },
   onMapToggle: function(labels) {
     var verb =  labels[1] || "";
