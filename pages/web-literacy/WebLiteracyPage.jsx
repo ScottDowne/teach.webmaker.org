@@ -237,16 +237,12 @@ module.exports = React.createClass({
       <div>
         <div className="inner-container">
           <h1>Web Literacy</h1>
-
-          <section className="intro">
-            <p>
-              A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
-              by selecting what you want to learn more about, to see definitions and activities.
-            </p>
-          </section>
+          <p>
+            A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
+            by selecting what you want to learn more about, to see definitions and activities.
+          </p>
 
           <section className="weblit-nav">
-            <CircleTree data={weblitdataroot} color={weblitcolors} onToggle={this.onMapToggle}/>
             <div className="c21-skills">
               <h3>21st Century Skills</h3>
               <ul>
@@ -266,6 +262,7 @@ module.exports = React.createClass({
               }
               </ul>
             </div>
+            <CircleTree data={weblitdataroot} color={weblitcolors} onToggle={this.onMapToggle}/>
           </section>
         </div>
         {
