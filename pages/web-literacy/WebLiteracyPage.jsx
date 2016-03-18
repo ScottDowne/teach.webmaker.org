@@ -19,6 +19,27 @@ var topicContent = weblitcontent.topics;
 var webLitSkillsContent = weblitcontent.webLitSkills;
 var makeLinksFromWebLitSkills = require("./MakeLinksFromWebLitSkills.jsx");
 
+function makeLinksFrom21CSkills(skills21C) {
+  return (
+    <span>
+    {
+      skills21C.map(function(skill21C, index) {
+        var comma = "";
+        if (index+1 < skills21C.length) {
+          comma = ", ";
+        }
+        return (
+          <span>
+            {categories[skill21C]}
+            {comma}
+          </span>
+        );
+      })
+    }
+    </span>
+  );
+} 
+
 var Topic = React.createClass({
   render: function() {
     var className = "topic-item";
@@ -109,7 +130,7 @@ var Activity = React.createClass({
         <span><i className="fa fa-clock-o"></i>{this.props.duration}</span>
         <p>{this.props.content}</p>
         <div><b>Web Literacy SKills:</b> {makeLinksFromWebLitSkills(this.props.webLitSkills)}</div>
-        <div><b>21C Skills:</b> <Link to="web-literacy/skills">{this.props.skills.join(", ")}</Link></div>
+        <div><b>21C Skills:</b> <Link to="web-literacy/skills">{makeLinksFrom21CSkills(this.props.skills)}</Link></div>
       </Illustration>
     );
   }
@@ -167,15 +188,22 @@ module.exports = React.createClass({
       return topicWebLitSkills.indexOf(webLitSkill) !== -1;
     });
   },
+  hasMatching21CSkillIn: function(skills21C) {
+    var state = this.state;
+    return skills21C.some(function(skill21C) {
+      return state[skill21C + "-checked"];
+    });
+  },
   renderActivities: function() {
     var selectedTopic = this.state.topic;
     var selectedWebLitSkill = this.state.webLitSkill;
     var hasWebLitSkillIn = this.hasWebLitSkillIn;
     var hasMatchingWebLitSkillIn = this.hasMatchingWebLitSkillIn;
+    var hasMatching21CSkillIn = this.hasMatching21CSkillIn;
 
     var activities = [];
     activitydata.forEach(function(activity, index) {
-      if (hasWebLitSkillIn(activity.webLitSkills) || hasMatchingWebLitSkillIn(activity.webLitSkills)) {
+      if ((hasWebLitSkillIn(activity.webLitSkills) || hasMatchingWebLitSkillIn(activity.webLitSkills)) && hasMatching21CSkillIn(activity.skills)) {
         activities.push(
           <div className="activity-item" key={index}>
             <Activity
