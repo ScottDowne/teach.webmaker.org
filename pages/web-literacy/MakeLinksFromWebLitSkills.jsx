@@ -1,24 +1,24 @@
 var React = require('react');
 var weblitcontent = require('./weblitcontent');
-var competenciesContent = weblitcontent.competencies;
+var webLitSkillsContent = weblitcontent.webLitSkills;
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
-module.exports = function(competencies) {
+module.exports = function(webLitSkills) {
   return (
     <span>
     {
-      competencies.map(function(competency, index) {
+      webLitSkills.map(function(webLitSkill, index) {
         var comma = "";
-        if (index+1 < competencies.length) {
+        if (index+1 < webLitSkills.length) {
           comma = ", ";
         }
         return (
           <span>
-            <Link key={competency}
-              to={"/web-literacy/" + competenciesContent[competency].topic + "/" + competency + "/"}
+            <Link key={webLitSkill}
+              to={"/web-literacy/" + webLitSkillsContent[webLitSkill].topic + "/" + webLitSkill + "/"}
             >
-              {competency}
+              {webLitSkill}
             </Link>
             {comma}
           </span>

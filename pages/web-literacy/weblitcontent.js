@@ -13,7 +13,7 @@ module.exports = {
       imgSrc1x: "/img/pages/web-literacy/web-lit-icon_participate.svg"
     }
   },
-  competencies: {
+  webLitSkills: {
     Design: {
       topic: "Write",
       quote: "Creating mental and physical representations of digital content focused on accessibility and approachability.",

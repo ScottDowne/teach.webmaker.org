@@ -3,7 +3,7 @@ var HeroUnit = require('../../components/hero-unit.jsx');
 var Illustration = require('../../components/illustration.jsx');
 var OutboundLink = require('react-ga').OutboundLink;
 var skills = require('./skillsdata');
-var makeLinksFromCompetencies = require("./MakeLinksFromCompetencies.jsx");
+var makeLinksFromWebLitSkills = require("./MakeLinksFromWebLitSkills.jsx");
 
 module.exports = React.createClass({
   statics: {
@@ -36,7 +36,7 @@ module.exports = React.createClass({
                     {
                       Object.keys(skill.topics).map(function(topic) {
                         return (
-                          <div><b>{topic}:</b> {makeLinksFromCompetencies(skill.topics[topic])}</div>
+                          <div><b>{topic}:</b> {makeLinksFromWebLitSkills(skill.topics[topic])}</div>
                         );
                       })
                     }

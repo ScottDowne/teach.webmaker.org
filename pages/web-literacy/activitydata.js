@@ -19,7 +19,7 @@ module.exports = [
   {
     name: "Kraken the Code",
     topic: "Read",
-    competencies: [search, evaluate],
+    webLitSkills: [search, evaluate],
     skills: ["Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics/img-kraken-code.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-kraken-code@2x.jpg",
@@ -30,7 +30,7 @@ module.exports = [
   {
     name: "Ping Kong",
     topic: "Read",
-    competencies: [navigate, synthesize],
+    webLitSkills: [navigate, synthesize],
     skills: ["Communicate"],
     imgSrc1x: "/img/pages/web-lit-basics/img-ping-kong.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-ping-kong@2x.jpg",
@@ -41,7 +41,7 @@ module.exports = [
   {
     name: "HTML Puzzle Cubes",
     topic: "Write",
-    competencies: [code, remix],
+    webLitSkills: [code, remix],
     skills: ["Creativity"],
     imgSrc1x: "/img/pages/web-lit-basics/img-puzzle-boxes.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-puzzle-boxes@2x.jpg",
@@ -52,7 +52,7 @@ module.exports = [
   {
     name: "Hack the News",
     topic: "Write",
-    competencies: [code, compose],
+    webLitSkills: [code, compose],
     skills: ["Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics/img-hack-news.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-hack-news@2x.jpg",
@@ -63,7 +63,7 @@ module.exports = [
   {
     name: "Web Chef",
     topic: "Participate",
-    competencies: [connect, open, remix, share],
+    webLitSkills: [connect, open, remix, share],
     skills: ["Communicate"],
     imgSrc1x: "/img/pages/web-lit-basics/img-web-chef.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-web-chef@2x.jpg",
@@ -74,7 +74,7 @@ module.exports = [
   {
     name: "Story of Us",
     topic: "Participate",
-    competencies: [collaborate, compose, connect, share],
+    webLitSkills: [collaborate, compose, connect, share],
     skills: ["Communicate", "Creativity"],
     imgSrc1x: "/img/pages/web-lit-basics/img-story-of-us.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-story-of-us@2x.jpg",
@@ -85,7 +85,7 @@ module.exports = [
   {
     name: "Why do we use the Web?",
     topic: "Participate",
-    competencies: [collaborate, evaluate, open, share, remix],
+    webLitSkills: [collaborate, evaluate, open, share, remix],
     skills: ["Communicate", "Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/why-do-we-use-the-web.png",
     imgSrc2x: "/img/pages/web-lit-basics-two/why-do-we-use-the-web@2x.png",
@@ -96,7 +96,7 @@ module.exports = [
   {
     name: "The Web is a Tool for Learning",
     topic: "Read",
-    competencies: [navigate],
+    webLitSkills: [navigate],
     skills: ["Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/the-web-is-a-tool-for-learning.jpg",
     imgSrc2x: "/img/pages/web-lit-basics-two/the-web-is-a-tool-for-learning@2x.jpg",
@@ -107,7 +107,7 @@ module.exports = [
   {
     name: "Project Playlist",
     topic: "Write",
-    competencies: [code, compose, remix, search],
+    webLitSkills: [code, compose, remix, search],
     skills: ["Creativity"],
     imgSrc1x: "/img/pages/web-lit-basics-two/project-playlist.png",
     duration: "70 minutes-90 minutes",
@@ -117,7 +117,7 @@ module.exports = [
   {
     name: "Welcome to My Mixtape",
     topic: "Write",
-    competencies: [code, compose, synthesize],
+    webLitSkills: [code, compose, synthesize],
     skills: ["Creativity"],
     imgSrc1x: "/img/pages/web-lit-basics-two/welcome-to-my-mixtape.jpg",
     duration: "90 minutes-2 hours",
@@ -127,7 +127,7 @@ module.exports = [
   {
     name: "Pixel Portrait",
     topic: "Write",
-    competencies: [compose],
+    webLitSkills: [compose],
     skills: ["Creativity"],
     imgSrc1x: "/img/pages/web-lit-basics-two/pixel-portrait.png",
     duration: "105 minutes-120 minutes",
@@ -137,7 +137,7 @@ module.exports = [
   {
     name: "#allthezstickerz",
     topic: "Participate",
-    competencies: [code, compose, connect, evaluate, open, remix, synthesize],
+    webLitSkills: [code, compose, connect, evaluate, open, remix, synthesize],
     skills: ["Communication", "Creativity", "Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/allthestickerz.png",
     duration: "3 hours",
@@ -147,7 +147,7 @@ module.exports = [
   {
     name: "Who Am I?",
     topic: "Read",
-    competencies: [evaluate, navigate, search],
+    webLitSkills: [evaluate, navigate, search],
     skills: ["Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/who-am-i.png",
     duration: "90 minutes",
@@ -157,7 +157,7 @@ module.exports = [
   {
     name: "Fair Use Free-for-All",
     topic: "Read",
-    competencies: [evaluate, navigate, open, search],
+    webLitSkills: [evaluate, navigate, open, search],
     skills: ["Communication", "Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/fair-use-free-for-all.png",
     duration: "1-2 hours",
@@ -167,7 +167,7 @@ module.exports = [
   {
     name: "The Planets & Accessibility",
     topic: "Write",
-    competencies: [code, compose, design, remix],
+    webLitSkills: [code, compose, design, remix],
     skills: ["Communication", "Creativity", "Problem Solving"],
     imgSrc1x: "/img/pages/web-lit-basics-two/the-planets.jpg",
     duration: "110 minutes-2 hours",
