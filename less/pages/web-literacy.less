@@ -12,29 +12,28 @@
       margin-bottom: 0;
     }
   }
+  .inner-container {
+    padding-bottom: 45px;
+  }
   .illustration {
+    .image-container {
+      margin-bottom: 0;
+      margin-top: 10px;
+    }
+    h2 {
+      margin-top: 0;
+    }
     @media screen and (min-width: @screen-sm-min) {
       padding-top: 8px;
       align-items: stretch;
       .image-container {
         margin-top: 10px;
       }
-      .content-container {
-        h2 {
-          margin-top: 0;
-        }
-      }
     }
   }
   .topic-item {
     .lighten {
       opacity: .5;
-    }
-    margin: 0 -15px;
-    padding: 2rem 6.5rem;
-    &.active {
-      background: #EEE;
-      padding-bottom: 40px;
     }
     @media screen and (min-width: @screen-sm-min) {
       &.active {
@@ -132,11 +131,6 @@
     }
 
     .c21-skills {
-
-      h3 {
-        color: skyblue;
-      }
-
       ul {
         display: inline-block;
         list-style: none;

@@ -27,7 +27,7 @@ module.exports = React.createClass({
               skills.map(function(skill) {
                 return (
                   <Illustration
-                    width={200} height={200}
+                    width={150} height={150}
                     src1x={skill.imgSrc1x}
                     src2x={skill.imgSrc2x}
                     alt="">

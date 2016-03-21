@@ -64,7 +64,7 @@ var Topic = React.createClass({
           <div>
             <h2>{this.props.topic}</h2>
             <Illustration
-              width={200} height={200}
+              width={100} height={100}
               src1x={this.props.src1x}
               src2x={this.props.src2x}
               alt="">
@@ -79,7 +79,7 @@ var Topic = React.createClass({
       content = (
         <div>
           <Illustration
-            width={200} height={200}
+            width={150} height={150}
             src1x={this.props.src1x}
             src2x={this.props.src2x}
             alt="">
@@ -146,11 +146,7 @@ module.exports = React.createClass({
     var topic = this.props.params.verb || "";
     var webLitSkill = this.props.params.webLitSkill || "";
     var state = {};
-    var hasCategory = this.hasCategory;
     if (this.state.topic !== topic || this.state.webLitSkill !== webLitSkill) {
-      Object.keys(categories).map(function(cat) {
-        state[cat + "-checked"] = hasCategory(cat, topic, webLitSkill);
-      });
       state.topic = topic;
       state.webLitSkill = webLitSkill;
       this.setState(state);
@@ -163,14 +159,15 @@ module.exports = React.createClass({
     this.updateMapNavState();
   },
   getInitialState: function() {
-    var state = {
-      topic: "",
-      webLitSkill: ""
-    };
+    var filter = {};
     Object.keys(categories).map(function(cat) {
-      state[cat + "-checked"] = true;
+      filter[categories[cat]] = false;
     });
-    return state;
+    return {
+      topic: "",
+      webLitSkill: "",
+      filter: filter
+    };
   },
   hasWebLitSkillIn: function(webLitSkills) {
     var webLitSkill = this.state.webLitSkill;
@@ -190,9 +187,25 @@ module.exports = React.createClass({
   },
   hasMatching21CSkillIn: function(skills21C) {
     var state = this.state;
+    var hasCategory = this.hasCategory;
     return skills21C.some(function(skill21C) {
-      return state[skill21C + "-checked"];
+      return !state.filter[categories[skill21C]] && hasCategory(skill21C, state.topic, state.webLitSkill);
     });
+  },
+  hasCategory: function(cat, selectedVerb, selectedWebLitSkill) {
+    var cat = categories[cat];
+
+    if (!selectedVerb) {
+      return true;
+    }
+
+    if (!selectedWebLitSkill) {
+      return Object.keys(weblitdata[selectedVerb]).some(function(item) {
+        return weblitdata[selectedVerb][item].indexOf(cat) !== -1;
+      });
+    }
+
+    return weblitdata[selectedVerb][selectedWebLitSkill].indexOf(cat) !== -1;
   },
   renderActivities: function() {
     var selectedTopic = this.state.topic;
@@ -235,21 +248,6 @@ module.exports = React.createClass({
       );
     }
   },
-  hasCategory: function(cat, selectedVerb, selectedWebLitSkill) {
-    var cat = categories[cat];
-
-    if (!selectedVerb) {
-      return true;
-    }
-
-    if (!selectedWebLitSkill) {
-      return Object.keys(weblitdata[selectedVerb]).some(function(item) {
-        return weblitdata[selectedVerb][item].indexOf(cat) !== -1;
-      });
-    }
-
-    return weblitdata[selectedVerb][selectedWebLitSkill].indexOf(cat) !== -1;
-  },
   onMapToggle: function(labels) {
     var verb =  labels[1] || "";
     var webLitSkill = labels[2] || "";
@@ -263,29 +261,34 @@ module.exports = React.createClass({
     this.history.pushState(null, url);
   },
   skillCheckboxUpdated: function(checkbox, checked) {
-    var state = {};
-    state[checkbox] = checked;
+    var state = {
+      filter: this.state.filter
+    };
+    state.filter[checkbox] = !checked;
     this.setState(state);
   },
   render: function() {
-    var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
+    var whitepaperLink = "http://mozilla.github.io/content/web-lit-whitepaper/";
     var selectedTopic = this.state.topic;
     var selectedWebLitSkill = this.state.webLitSkill;
     var hasCategory = this.hasCategory;
     var state = this.state;
     var skillCheckboxUpdated = this.skillCheckboxUpdated;
+
+    var filter = this.state.filter;
     return (
       <div>
         <div className="inner-container">
-          <h1>Web Literacy</h1>
-          <p>
-            A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
-            by selecting what you want to learn more about, to see definitions and activities.
-          </p>
-
+          <section>
+            <h1>Web Literacy</h1>
+            <p>
+              A framework for entry-level web literacy &amp; 21st Century skills. Explore the map
+              by selecting what you want to learn more about, to see definitions and activities.
+            </p>
+          </section>
           <section className="weblit-nav">
             <div className="c21-skills">
-              <h3>21st Century Skills</h3>
+              <Link to="web-literacy/skills"><h3>21st Century Skills</h3></Link>
               <ul>
               {
                 Object.keys(categories).map(function(cat) {
@@ -293,13 +296,13 @@ module.exports = React.createClass({
                   var checked = false;
                   if (hasCategory(cat, selectedTopic, selectedWebLitSkill)) {
                     className += " active-skill";
-                    checked = state[cat + "-checked"];
+                    checked = !state.filter[categories[cat]];
                   }
                   return (
                     <li className={className} key={cat}>
                       <span className="custom-checkbox-container">
                         <input onChange={function() {
-                          skillCheckboxUpdated(cat + "-checked", !checked);
+                          skillCheckboxUpdated(categories[cat], !checked);
                         }} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
                         <label className="checkbox-label" htmlFor={cat + "-checkbox"}>
                           <span className="custom-checkbox">
@@ -314,26 +317,24 @@ module.exports = React.createClass({
               }
               </ul>
             </div>
-            <CircleTree data={weblitdataroot} color={weblitcolors} onToggle={this.onMapToggle}/>
+            <CircleTree data={weblitdataroot} filter={filter} color={weblitcolors} onToggle={this.onMapToggle}/>
           </section>
-        </div>
-        {
-          Object.keys(weblitdata).map(function(topic) {
-            return (
-              <Topic
-                selectedTopic={selectedTopic}
-                selectedWebLitSkill={selectedWebLitSkill}
-                topic={topic}
-                webLitSkills={weblitdata[topic]}
-                src1x={topicContent[topic].imgSrc1x}
-                src2x={topicContent[topic].imgSrc2x}
-                content={topicContent[topic].content}
-              />
-            );
-          })
-        }
-        <div className="inner-container">
           <section>
+          {
+            Object.keys(weblitdata).map(function(topic) {
+              return (
+                <Topic
+                  selectedTopic={selectedTopic}
+                  selectedWebLitSkill={selectedWebLitSkill}
+                  topic={topic}
+                  webLitSkills={weblitdata[topic]}
+                  src1x={topicContent[topic].imgSrc1x}
+                  src2x={topicContent[topic].imgSrc2x}
+                  content={topicContent[topic].content}
+                />
+              );
+            })
+          }
             {this.renderActivities()}
           </section>
           <section className="text-center">
