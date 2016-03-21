@@ -1,4 +1,3 @@
-var contribute = "Contribute";
 var search = "Search";
 var navigate = "Navigate";
 var synthesize = "Synthesize";
@@ -17,7 +16,7 @@ module.exports = [
   {
     name: "Kraken the Code",
     topic: "Read",
-    webLitSkills: [search, evaluate],
+    webLitSkills: [search, synthesize, evaluate],
     skills: ["PS"],
     imgSrc1x: "/img/pages/web-lit-basics/img-kraken-code.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-kraken-code@2x.jpg",
@@ -50,8 +49,8 @@ module.exports = [
   {
     name: "Hack the News",
     topic: "Write",
-    webLitSkills: [code, compose],
-    skills: ["PS"],
+    webLitSkills: [connect, code, compose, open],
+    skills: ["PS", "Cre", "Com"],
     imgSrc1x: "/img/pages/web-lit-basics/img-hack-news.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-hack-news@2x.jpg",
     duration: "45 minutes-1 hour",
@@ -62,7 +61,7 @@ module.exports = [
     name: "Web Chef",
     topic: "Participate",
     webLitSkills: [connect, open, remix, share],
-    skills: ["Com"],
+    skills: ["Com", "PS", "Col"],
     imgSrc1x: "/img/pages/web-lit-basics/img-web-chef.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-web-chef@2x.jpg",
     duration: "1-2 hours",
@@ -72,7 +71,7 @@ module.exports = [
   {
     name: "Story of Us",
     topic: "Participate",
-    webLitSkills: [contribute, compose, connect, share],
+    webLitSkills: [compose, connect, share],
     skills: ["Com", "Cre", "Col"],
     imgSrc1x: "/img/pages/web-lit-basics/img-story-of-us.jpg",
     imgSrc2x: "/img/pages/web-lit-basics/img-story-of-us@2x.jpg",
@@ -83,7 +82,7 @@ module.exports = [
   {
     name: "Why do we use the Web?",
     topic: "Participate",
-    webLitSkills: [contribute, evaluate, open, share, remix],
+    webLitSkills: [evaluate, open, share],
     skills: ["Com", "PS", "Col"],
     imgSrc1x: "/img/pages/web-lit-basics-two/why-do-we-use-the-web.png",
     imgSrc2x: "/img/pages/web-lit-basics-two/why-do-we-use-the-web@2x.png",
@@ -94,7 +93,7 @@ module.exports = [
   {
     name: "The Web is a Tool for Learning",
     topic: "Read",
-    webLitSkills: [navigate],
+    webLitSkills: [navigate, remix, evaluate, open],
     skills: ["PS"],
     imgSrc1x: "/img/pages/web-lit-basics-two/the-web-is-a-tool-for-learning.jpg",
     imgSrc2x: "/img/pages/web-lit-basics-two/the-web-is-a-tool-for-learning@2x.jpg",
@@ -105,7 +104,7 @@ module.exports = [
   {
     name: "Project Playlist",
     topic: "Write",
-    webLitSkills: [code, compose, remix, search],
+    webLitSkills: [code, compose, remix, search, open],
     skills: ["Cre"],
     imgSrc1x: "/img/pages/web-lit-basics-two/project-playlist.png",
     duration: "70 minutes-90 minutes",
@@ -115,7 +114,7 @@ module.exports = [
   {
     name: "Welcome to My Mixtape",
     topic: "Write",
-    webLitSkills: [code, compose, synthesize],
+    webLitSkills: [code, compose, synthesize, remix, open],
     skills: ["Cre"],
     imgSrc1x: "/img/pages/web-lit-basics-two/welcome-to-my-mixtape.jpg",
     duration: "90 minutes-2 hours",
@@ -125,7 +124,7 @@ module.exports = [
   {
     name: "Pixel Portrait",
     topic: "Write",
-    webLitSkills: [compose],
+    webLitSkills: [compose, open],
     skills: ["Cre"],
     imgSrc1x: "/img/pages/web-lit-basics-two/pixel-portrait.png",
     duration: "105 minutes-120 minutes",
@@ -136,7 +135,7 @@ module.exports = [
     name: "#allthezstickerz",
     topic: "Participate",
     webLitSkills: [code, compose, connect, evaluate, open, remix, synthesize],
-    skills: ["Com", "Cre", "PS"],
+    skills: ["Com", "Cre", "PS", "Col"],
     imgSrc1x: "/img/pages/web-lit-basics-two/allthestickerz.png",
     duration: "3 hours",
     content: "Learners will create pixel art stickers, publish them for others, and use them to annotate and remix the Web, learning community participation, composing, open practices, remix, and sharing.",
@@ -145,8 +144,8 @@ module.exports = [
   {
     name: "Who Am I?",
     topic: "Read",
-    webLitSkills: [evaluate, navigate, search],
-    skills: ["PS"],
+    webLitSkills: [evaluate, navigate, search, compose, remix],
+    skills: ["PS", "Cre"],
     imgSrc1x: "/img/pages/web-lit-basics-two/who-am-i.png",
     duration: "90 minutes",
     content: "Learners will conduct a reverse image search to find information about a subject online and then revise a webpage with their own text and images, learning composing and search.",
