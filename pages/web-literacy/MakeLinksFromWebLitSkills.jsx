@@ -14,7 +14,7 @@ module.exports = function(webLitSkills) {
           comma = ", ";
         }
         return (
-          <span>
+          <span key={webLitSkill}>
             <Link key={webLitSkill}
               to={"/web-literacy/" + webLitSkillsContent[webLitSkill].topic + "/" + webLitSkill + "/"}
             >

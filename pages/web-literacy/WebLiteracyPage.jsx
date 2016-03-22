@@ -29,7 +29,7 @@ function makeLinksFrom21CSkills(skills21C) {
           comma = ", ";
         }
         return (
-          <span>
+          <span key={skill21C}>
             {categories[skill21C]}
             {comma}
           </span>
@@ -40,83 +40,6 @@ function makeLinksFrom21CSkills(skills21C) {
   );
 } 
 
-var Topic = React.createClass({
-  render: function() {
-    var className = "topic-item";
-    var content = null;
-    if (this.props.selectedTopic) {
-      if (this.props.selectedTopic !== this.props.topic) {
-        className += " hidden";
-      } else if (this.props.webLitSkills[this.props.selectedWebLitSkill]) {
-        className += " active";
-        // We're displaying a web lit skill.
-        content = (
-          <div>
-            <h2><span className="lighten">{this.props.selectedTopic} &rsaquo;</span> {this.props.selectedWebLitSkill}</h2>
-            <WebLitSkillItem webLitSkill={this.props.selectedWebLitSkill}/>
-            <div><b>21C Skills:</b> <Link to="web-literacy/skills">{weblitdata[this.props.selectedTopic][this.props.selectedWebLitSkill].join(", ")}</Link></div>
-          </div>
-        );
-      } else {
-        className += " active";
-        // We're displaying a selected topic.
-        content = (
-          <div>
-            <h2>{this.props.topic}</h2>
-            <Illustration
-              width={100} height={100}
-              src1x={this.props.src1x}
-              src2x={this.props.src2x}
-              alt="">
-              <p>{topicContent[this.props.topic].content}</p>
-            </Illustration>
-            <span><b>Web Literacy Skills:</b> {makeLinksFromWebLitSkills(Object.keys(this.props.webLitSkills))}</span>
-          </div>
-        );
-      }
-    } else {
-      // We're displaying all topics on top of each other.
-      content = (
-        <div>
-          <Illustration
-            width={150} height={150}
-            src1x={this.props.src1x}
-            src2x={this.props.src2x}
-            alt="">
-            <h2>{this.props.topic}</h2>
-            <p>{topicContent[this.props.topic].content}</p>
-            <span><b>Web Literacy Skills:</b> {makeLinksFromWebLitSkills(Object.keys(this.props.webLitSkills))}</span>
-          </Illustration>
-        </div>
-      );
-    }
-    return (
-      <div key={this.props.topic} className={className}>
-        <div>
-          {content}
-        </div>
-      </div>
-    );
-  }
-});
-var WebLitSkillItem = React.createClass({
-  render: function() {
-    return (
-      <div className="web-lit-skill-item">
-        <h3 className="web-lit-skill-quote">{webLitSkillsContent[this.props.webLitSkill].quote}</h3>
-        {
-          webLitSkillsContent[this.props.webLitSkill].content.map(function(value, index) {
-            return (
-              <p className="web-lit-skill-paragraph" key={index}>
-                {value}
-              </p>
-            );
-          })
-        }
-      </div>
-    );
-  }
-});
 var Activity = React.createClass({
   render: function() {
     return (
@@ -136,7 +59,7 @@ var Activity = React.createClass({
   }
 });
 
-module.exports = React.createClass({
+var WebLitPage = React.createClass({
   mixins: [History],
   statics: {
     pageTitle: "Web Literacy",
@@ -248,6 +171,97 @@ module.exports = React.createClass({
       );
     }
   },
+  renderCheckboxes: function() {
+    var state = this.state;
+    var selectedTopic = state.topic;
+    var selectedWebLitSkill = state.webLitSkill;
+    var hasCategory = this.hasCategory;
+    var skillCheckboxUpdated = this.skillCheckboxUpdated;
+    return Object.keys(categories).map(function(cat) {
+      var className = cat;
+      var checked = false;
+      if (hasCategory(cat, selectedTopic, selectedWebLitSkill)) {
+        className += " active-skill";
+        checked = !state.filter[categories[cat]];
+      }
+      return (
+        <li className={className} key={cat}>
+          <span className="custom-checkbox-container">
+            <input onChange={function() {
+              skillCheckboxUpdated(categories[cat], !checked);
+            }} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
+            <label className="checkbox-label" htmlFor={cat + "-checkbox"}>
+              <span className="custom-checkbox">
+                <i className="fa fa-check"></i>
+              </span>
+              { categories[cat] }
+            </label>
+          </span>
+        </li>
+      );
+    });
+  },
+  renderTopics: function() {
+    if (this.state.topic) {
+      return null;
+    }
+    return Object.keys(weblitdata).map(function(topic) {
+      return (
+        <div key={topic} className="">
+          <Illustration
+            width={150} height={150}
+            src1x={topicContent[topic].imgSrc1x}
+            src2x={topicContent[topic].imgSrc2x}
+            alt="">
+            <h2>{topic}</h2>
+            <p>{topicContent[topic].content}</p>
+            <span><b>Web Literacy Skills:</b> {makeLinksFromWebLitSkills(Object.keys(weblitdata[topic]))}</span>
+          </Illustration>
+        </div>
+      );
+    });
+  },
+  renderTopic: function() {
+    if (!this.state.topic || this.state.webLitSkill) {
+      return null;
+    }
+    return (
+      <div className="topic-container">
+        <h3>{this.state.topic}</h3>
+        <p><img src={topicContent[this.state.topic].imgSrc1x} width={75} height={75}/>{topicContent[this.state.topic].content}</p>
+      </div>
+    );
+  },
+  renderWebLitSkill: function() {
+    if (!this.state.topic || !this.state.webLitSkill) {
+      return null;
+    }
+    return (
+      <div className="web-lit-skill">
+        <h3><span className="lighten">{this.state.topic} &rsaquo;</span> {this.state.webLitSkill}</h3>
+        <p>{webLitSkillsContent[this.state.webLitSkill].quote}</p>
+      </div>
+    );
+  },
+  renderCompetencies: function() {
+    if (!this.state.topic || !this.state.webLitSkill) {
+      return null;
+    }
+    return (
+      <div className="web-lit-competency">
+        <h3>{this.state.webLitSkill} Competencies</h3>
+        {
+          webLitSkillsContent[this.state.webLitSkill].content.map(function(value, index) {
+            return (
+              <p className="web-lit-skill-content" key={index}>
+                {value}
+              </p>
+            );
+          })
+        }
+      </div>
+    );
+  },
   onMapToggle: function(labels) {
     var verb =  labels[1] || "";
     var webLitSkill = labels[2] || "";
@@ -269,11 +283,6 @@ module.exports = React.createClass({
   },
   render: function() {
     var whitepaperLink = "http://mozilla.github.io/content/web-lit-whitepaper/";
-    var selectedTopic = this.state.topic;
-    var selectedWebLitSkill = this.state.webLitSkill;
-    var hasCategory = this.hasCategory;
-    var state = this.state;
-    var skillCheckboxUpdated = this.skillCheckboxUpdated;
 
     var filter = this.state.filter;
     return (
@@ -290,51 +299,18 @@ module.exports = React.createClass({
             <div className="c21-skills">
               <Link to="web-literacy/skills"><h3>21st Century Skills</h3></Link>
               <ul>
-              {
-                Object.keys(categories).map(function(cat) {
-                  var className = cat;
-                  var checked = false;
-                  if (hasCategory(cat, selectedTopic, selectedWebLitSkill)) {
-                    className += " active-skill";
-                    checked = !state.filter[categories[cat]];
-                  }
-                  return (
-                    <li className={className} key={cat}>
-                      <span className="custom-checkbox-container">
-                        <input onChange={function() {
-                          skillCheckboxUpdated(categories[cat], !checked);
-                        }} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
-                        <label className="checkbox-label" htmlFor={cat + "-checkbox"}>
-                          <span className="custom-checkbox">
-                            <i className="fa fa-check"></i>
-                          </span>
-                          { categories[cat] }
-                        </label>
-                      </span>
-                    </li>
-                  );
-                })
-              }
+                {this.renderCheckboxes()}
               </ul>
             </div>
             <CircleTree data={weblitdataroot} filter={filter} color={weblitcolors} onToggle={this.onMapToggle}/>
+            <div className="c21-skills">
+              {this.renderTopic()}
+              {this.renderWebLitSkill()}
+            </div>
           </section>
           <section>
-          {
-            Object.keys(weblitdata).map(function(topic) {
-              return (
-                <Topic
-                  selectedTopic={selectedTopic}
-                  selectedWebLitSkill={selectedWebLitSkill}
-                  topic={topic}
-                  webLitSkills={weblitdata[topic]}
-                  src1x={topicContent[topic].imgSrc1x}
-                  src2x={topicContent[topic].imgSrc2x}
-                  content={topicContent[topic].content}
-                />
-              );
-            })
-          }
+            {this.renderTopics()}
+            {this.renderCompetencies()}
             {this.renderActivities()}
           </section>
           <section className="text-center">
@@ -349,3 +325,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = WebLitPage;
