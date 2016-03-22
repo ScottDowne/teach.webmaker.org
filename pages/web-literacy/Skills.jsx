@@ -31,8 +31,33 @@ module.exports = React.createClass({
                     src1x={skill.imgSrc1x}
                     src2x={skill.imgSrc2x}
                     alt="">
-                    <h2>{skill.name}</h2>
+                    <h2 id={skill.name}>{skill.name}</h2>
                     <p>{skill.content}</p>
+                    <h3>Competencies</h3>
+                    <div className="competency-content">
+                      {
+                        skill.competencies.map(function(competency) {
+                          if (competency.name) {
+                            return (
+                              <div key={competency.name}>
+                                <h4>{competency.name}</h4>
+                                {
+                                  competency.content.map(function(contentItem) {
+                                    return (
+                                      <p key={contentItem}>{contentItem}</p>
+                                    );
+                                  })
+                                }
+                              </div>
+                            );
+                          }
+                          return (
+                            <p key={competency}>{competency}</p>
+                          );
+                        })
+                      }
+                    </div>
+                    <h3>Web Literacy Skills</h3>
                     {
                       Object.keys(skill.topics).map(function(topic) {
                         return (

@@ -29,10 +29,12 @@ function makeLinksFrom21CSkills(skills21C) {
           comma = ", ";
         }
         return (
-          <span key={skill21C}>
-            {categories[skill21C]}
-            {comma}
-          </span>
+          <a href={"/web-literacy/skills/#" + categories[skill21C]}>
+            <span key={skill21C}>
+              {categories[skill21C]}
+              {comma}
+            </span>
+          </a>
         );
       })
     }
@@ -53,7 +55,7 @@ var Activity = React.createClass({
         <span><i className="fa fa-clock-o"></i>{this.props.duration}</span>
         <p>{this.props.content}</p>
         <div><b>Web Literacy SKills:</b> {makeLinksFromWebLitSkills(this.props.webLitSkills)}</div>
-        <div><b>21C Skills:</b> <Link to="web-literacy/skills">{makeLinksFrom21CSkills(this.props.skills)}</Link></div>
+        <div><b>21C Skills:</b> {makeLinksFrom21CSkills(this.props.skills)}</div>
       </Illustration>
     );
   }
