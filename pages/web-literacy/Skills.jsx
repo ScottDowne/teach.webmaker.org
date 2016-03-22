@@ -44,7 +44,7 @@ module.exports = React.createClass({
                                 {
                                   competency.content.map(function(contentItem) {
                                     return (
-                                      <p key={contentItem}>{contentItem}</p>
+                                      <div className="line-item" key={contentItem}>{contentItem}</div>
                                     );
                                   })
                                 }
@@ -52,7 +52,7 @@ module.exports = React.createClass({
                             );
                           }
                           return (
-                            <p key={competency}>{competency}</p>
+                            <div className="line-item" key={competency}>{competency}</div>
                           );
                         })
                       }

@@ -135,6 +135,7 @@
           }
           @media screen and (min-width: @screen-sm-min) {
             max-width: 100%;
+            font-size: 1.8rem;
           }
           width: 100%;
 
@@ -204,12 +205,13 @@
       overflow: hidden;
       .circletree {
         float: right;
-        width: 60%;
+        width: ~"calc(100% - 322px)";
+        padding: 0px 20px;
       }
       .c21-skills {
         float: left;
-        width: 40%;
-        padding-right: 20px;
+        width: 100%;
+        max-width: 322px;
       }
     }
   }
