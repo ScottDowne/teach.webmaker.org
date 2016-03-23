@@ -50,7 +50,8 @@ var redirects = {
 
 // aggregate all paths used in the app
 var urls = ['/'];
-urls = urls.concat(['web-literacy',
+urls = urls.concat([
+  'web-literacy',
   'web-literacy/Participate',
   'web-literacy/Participate/Connect',
   'web-literacy/Participate/Protect',
@@ -67,7 +68,8 @@ urls = urls.concat(['web-literacy',
   'web-literacy/Read/Search',
   'web-literacy/Read/Navigate',
   'web-literacy/Read/Synthesize',
-  'web-literacy/Read/Evaluate']);
+  'web-literacy/Read/Evaluate'
+]);
 
 urls = urls.concat( Object.keys(pages)     );
 urls = urls.concat( Object.keys(redirects) );

@@ -20,26 +20,15 @@ var webLitSkillsContent = weblitcontent.webLitSkills;
 var makeLinksFromWebLitSkills = require("./MakeLinksFromWebLitSkills.jsx");
 
 function makeLinksFrom21CSkills(skills21C) {
-  return (
-    <span>
-    {
-      skills21C.map(function(skill21C, index) {
-        var comma = "";
-        if (index+1 < skills21C.length) {
-          comma = ", ";
-        }
-        return (
-          <a href={"/web-literacy/skills/#" + categories[skill21C]}>
-            <span key={skill21C}>
-              {categories[skill21C]}
-              {comma}
-            </span>
-          </a>
-        );
-      })
-    }
-    </span>
-  );
+  return skills21C.map(function(skill21C, index) {
+    return (
+      <a key={skill21C} href={"/web-literacy/skills/#" + categories[skill21C]}>
+        <span className="comma-separated-links" key={skill21C}>
+          {categories[skill21C]}
+        </span>
+      </a>
+    );
+  });
 } 
 
 var Activity = React.createClass({
@@ -137,20 +126,14 @@ var WebLitPage = React.createClass({
     return weblitdata[selectedVerb][selectedWebLitSkill].indexOf(cat) !== -1;
   },
   renderActivities: function() {
-    var selectedTopic = this.state.topic;
-    var selectedWebLitSkill = this.state.webLitSkill;
-    var hasWebLitSkillIn = this.hasWebLitSkillIn;
-    var hasMatchingWebLitSkillIn = this.hasMatchingWebLitSkillIn;
-    var hasMatching21CSkillIn = this.hasMatching21CSkillIn;
-
     var activities = [];
     activitydata.forEach(function(activity, index) {
-      if ((hasWebLitSkillIn(activity.webLitSkills) || hasMatchingWebLitSkillIn(activity.webLitSkills)) && hasMatching21CSkillIn(activity.skills)) {
+      if ((this.hasWebLitSkillIn(activity.webLitSkills) || this.hasMatchingWebLitSkillIn(activity.webLitSkills)) && this.hasMatching21CSkillIn(activity.skills)) {
         activities.push(
           <div className="activity-item" key={index}>
             <Activity
-              selectedTopic={selectedTopic}
-              selectedWebLitSKill={selectedWebLitSkill}
+              selectedTopic={this.state.topic}
+              selectedWebLitSKill={this.state.webLitSkill}
               topic={activity.topic}
               name={activity.name}
               src1x={activity.imgSrc1x}
@@ -165,38 +148,33 @@ var WebLitPage = React.createClass({
           </div>
         );
       }
-    });
+    }.bind(this));
 
     if (!activities.length) {
       return null;
     } else {
       return (
         <div>
-          <h2>Related {selectedWebLitSkill || selectedTopic} Activities</h2>
+          <h2>Related {this.state.webLitSkill || this.state.topic} Activities</h2>
           {activities}
         </div>
       );
     }
   },
   renderCheckboxes: function() {
-    var state = this.state;
-    var selectedTopic = state.topic;
-    var selectedWebLitSkill = state.webLitSkill;
-    var hasCategory = this.hasCategory;
-    var skillCheckboxUpdated = this.skillCheckboxUpdated;
     return Object.keys(categories).map(function(cat) {
       var className = cat;
       var checked = false;
-      if (hasCategory(cat, selectedTopic, selectedWebLitSkill)) {
+      if (this.hasCategory(cat, this.state.topic, this.state.webLitSkill)) {
         className += " active-skill";
-        checked = !state.filter[categories[cat]];
+        checked = !this.state.filter[categories[cat]];
       }
       return (
         <li className={className} key={cat}>
           <span className="custom-checkbox-container">
             <input onChange={function() {
-              skillCheckboxUpdated(categories[cat], !checked);
-            }} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
+              this.skillCheckboxUpdated(categories[cat], !checked);
+            }.bind(this)} checked={checked} className="checkbox-input" type="checkbox" id={cat + "-checkbox"}/>
             <label className="checkbox-label" htmlFor={cat + "-checkbox"}>
               <span className="custom-checkbox">
                 <i className="fa fa-check"></i>
@@ -206,7 +184,7 @@ var WebLitPage = React.createClass({
           </span>
         </li>
       );
-    });
+    }.bind(this));
   },
   renderTopics: function() {
     if (this.state.topic) {

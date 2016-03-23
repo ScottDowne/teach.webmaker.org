@@ -10,6 +10,54 @@ module.exports = React.createClass({
     pageTitle: '21st Century Skills',
     pageClassName: 'web-literacy-skills-page'
   },
+  generateSkills: function() {
+    return skills.map(function(skill) {
+      return (
+        <Illustration
+          width={150} height={150}
+          src1x={skill.imgSrc1x}
+          src2x={skill.imgSrc2x}
+          alt="">
+          <h2 id={skill.name}>{skill.name}</h2>
+          <p>{skill.content}</p>
+          <h3>Competencies</h3>
+          <div className="competency-content">
+            { this.generateCompetencies(skill.competencies) }
+          </div>
+          <h3>Web Literacy Skills</h3>
+          {
+            Object.keys(skill.topics).map(function(topic) {
+              return (
+                <div><b>{topic}:</b> {makeLinksFromWebLitSkills(skill.topics[topic])}</div>
+              );
+            })
+          }
+        </Illustration>
+      );
+    }.bind(this));
+  },
+  generateCompetencies: function(competencies) {
+    competencies = competencies || [];
+    return competencies.map(function(competency) {
+      if (competency.name) {
+        return (
+          <div key={competency.name}>
+            <h4>{competency.name}</h4>
+            {
+              competency.content.map(function(contentItem) {
+                return (
+                  <div className="line-item" key={contentItem}>{contentItem}</div>
+                );
+              })
+            }
+          </div>
+        );
+      }
+      return (
+        <div className="line-item" key={competency}>{competency}</div>
+      );
+    });
+  },
   render: function() {
     var whitepaperLink = "https://mozilla.github.io/webmaker-whitepaper";
     return (
@@ -23,52 +71,7 @@ module.exports = React.createClass({
             <p>
               As people learn to read, write, and participate on the web, a cross-cutting set of 21C Skills emerge as skills critical to success in today’s world. They enable individuals to become teachers, advocates, and community leaders to leverage and advance the web as an open and public resource. The following 21C Skills correspond to the specific web literacy skills indicated below:
             </p>
-            {
-              skills.map(function(skill) {
-                return (
-                  <Illustration
-                    width={150} height={150}
-                    src1x={skill.imgSrc1x}
-                    src2x={skill.imgSrc2x}
-                    alt="">
-                    <h2 id={skill.name}>{skill.name}</h2>
-                    <p>{skill.content}</p>
-                    <h3>Competencies</h3>
-                    <div className="competency-content">
-                      {
-                        skill.competencies.map(function(competency) {
-                          if (competency.name) {
-                            return (
-                              <div key={competency.name}>
-                                <h4>{competency.name}</h4>
-                                {
-                                  competency.content.map(function(contentItem) {
-                                    return (
-                                      <div className="line-item" key={contentItem}>{contentItem}</div>
-                                    );
-                                  })
-                                }
-                              </div>
-                            );
-                          }
-                          return (
-                            <div className="line-item" key={competency}>{competency}</div>
-                          );
-                        })
-                      }
-                    </div>
-                    <h3>Web Literacy Skills</h3>
-                    {
-                      Object.keys(skill.topics).map(function(topic) {
-                        return (
-                          <div><b>{topic}:</b> {makeLinksFromWebLitSkills(skill.topics[topic])}</div>
-                        );
-                      })
-                    }
-                  </Illustration>
-                );
-              })
-            }
+            { this.generateSkills() }
           </section>
           <section className="text-center">
             <div className="vertical-divider"></div>

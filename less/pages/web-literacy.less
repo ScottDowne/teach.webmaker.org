@@ -76,38 +76,18 @@
     }
   }
   .weblit-nav {
-    @problemsolving: #793575;
-    @communication: #FAE695;
-    @collaboration: #8BCA6C;
-    @creativity: #136BB3;
-
     .circletree {
       .leaf {
         opacity: 0;
       }
       g {
         opacity: .3;
-        &.primary {
+        &.primary,
+        &.primary g,
+        &.primary .leaf,
+        &.active,
+        &:not(.primary):not(.active) g {
           opacity: 1;
-          g {
-            opacity: 1;
-          }
-          .leaf {
-            opacity: 1;
-          }
-        }
-        &.active {
-          opacity: 1;
-          g &:not(.primary) {
-            opacity: .3;
-          }
-        }
-        &:not(.primary) {
-          &:not(.active) {
-            g {
-              opacity: 1;
-            }
-          }
         }
       }
       .segment {
