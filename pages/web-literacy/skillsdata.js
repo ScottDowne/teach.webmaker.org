@@ -52,13 +52,28 @@ module.exports = [
     content: "Understanding and presenting verbal and nonverbal messages effectively.",
     imgSrc1x: "/img/pages/web-literacy/21cskills/21c-skill-icon_communication.svg",
     competencies: [
-      "Organizing presentation of ideas to appropriately inform and engage others.",
-      "Choosing effective modes and methods of presentation to most effectively convey ideas.",
-      "Evaluating one’s own interpretation and seeks data and evidence to enhance understanding of others.",
-      "Discerning credible and relevant sources to bolster meaning and enhance understanding.",
-      "Analyzing messages from others for implicit or explicit meaning to inform one’s own approach.",
-      "Evaluating and adjusting one’s own level of active engagement and degree of participation in group settings.",
-      "Seeking guidance to refine technique/approach to enhance effectiveness."
+      {
+        name: "placeholder 1",
+        content: [
+          "Organizing presentation of ideas to appropriately inform and engage others.",
+          "Choosing effective modes and methods of presentation to most effectively convey ideas.",
+          "Evaluating one’s own interpretation and seeks data and evidence to enhance understanding of others.",
+          "Discerning credible and relevant sources to bolster meaning and enhance understanding.",
+          "Analyzing messages from others for implicit or explicit meaning to inform one’s own approach.",
+          "Evaluating and adjusting one’s own level of active engagement and degree of participation in group settings.",
+          "Seeking guidance to refine technique/approach to enhance effectiveness."
+        ]
+      },
+      {
+        name: "placeholder 2",
+        content: [
+          "Initiating opportunities to communicate, interact, and work positively with individuals and groups.",
+          "Using appropriate tone, clarity, and styles of interacting with individuals and groups.",
+          "Building upon or synthesizing the contributions of others in a way that facilitates contributions by others.",
+          "Offering alternative solutions that build on the ideas of others where appropriate.",
+          "Writing with appropriate clarity, grammar and punctuation, and necessary information."
+        ]
+      }
     ],
     topics: {
       "Read": [synthesize],
@@ -77,16 +92,6 @@ module.exports = [
           "Engaging in behaviors and actions that show an awareness of and sensitivity to stereotyping and cultural bias.",
           "Using language that is appropriate to the purpose of the interaction and audience.",
           "Differentiating between appropriate and inappropriate behavior and actions to the purpose of the interaction and audience."
-        ]
-      },
-      {
-        name: "Communication",
-        content: [
-          "Initiating opportunities to communicate, interact, and work positively with individuals and groups.",
-          "Using appropriate tone, clarity, and styles of interacting with individuals and groups.",
-          "Building upon or synthesizing the contributions of others in a way that facilitates contributions by others.",
-          "Offering alternative solutions that build on the ideas of others where appropriate.",
-          "Writing with appropriate clarity, grammar and punctuation, and necessary information."
         ]
       },
       {
