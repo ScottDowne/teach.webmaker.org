@@ -37,10 +37,13 @@
     }
   }
   .activity-item {
-    .difficulty-link {
-      min-width: 270px;
-      display: inline-block;
-      padding-right: 10px;
+    .meta-container {
+      width: 100%;
+      max-width: 500px;
+      .meta-item {
+        width: 250px;
+        display: inline-block;
+      }
     }
     .fa {
       margin-right: 6px;
@@ -79,6 +82,34 @@
     @creativity: #136BB3;
 
     .circletree {
+      .leaf {
+        opacity: 0;
+      }
+      g {
+        opacity: .3;
+        &.primary {
+          opacity: 1;
+          g {
+            opacity: 1;
+          }
+          .leaf {
+            opacity: 1;
+          }
+        }
+        &.active {
+          opacity: 1;
+          g &:not(.primary) {
+            opacity: .3;
+          }
+        }
+        &:not(.primary) {
+          &:not(.active) {
+            g {
+              opacity: 1;
+            }
+          }
+        }
+      }
       .segment {
         stroke: transparent;
 

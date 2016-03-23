@@ -49,12 +49,16 @@ var Activity = React.createClass({
         width={200} height={200}
         src1x={this.props.src1x}
         src2x={this.props.src2x}
-        alt="">
-        <h2>{this.props.name}</h2>
-        <span className="difficulty-link"><i className="fa fa-users"></i>{this.props.difficulty}</span>
-        <span><i className="fa fa-clock-o"></i>{this.props.duration}</span>
+        link={this.props.href}
+        externalLink={true}
+        alt={this.props.name + "-activity-icon"}>
+        <h2><a href={this.props.href}>{this.props.name}</a></h2>
+        <div className="meta-container">
+          <span className="meta-item"><i className="fa fa-users"></i>{this.props.difficulty}</span>
+          <span className="meta-item"><i className="fa fa-clock-o"></i>{this.props.duration}</span>
+        </div>
         <p>{this.props.content}</p>
-        <div><b>Web Literacy SKills:</b> {makeLinksFromWebLitSkills(this.props.webLitSkills)}</div>
+        <div><b>Web Literacy Skills:</b> {makeLinksFromWebLitSkills(this.props.webLitSkills)}</div>
         <div><b>21C Skills:</b> {makeLinksFrom21CSkills(this.props.skills)}</div>
       </Illustration>
     );
@@ -156,6 +160,7 @@ var WebLitPage = React.createClass({
               difficulty={activity.difficulty}
               webLitSkills={activity.webLitSkills}
               skills={activity.skills}
+              href={activity.href}
             />
           </div>
         );
