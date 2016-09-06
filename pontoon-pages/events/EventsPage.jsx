@@ -1,12 +1,12 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
-var HeroUnit = require('../../components/hero-unit.jsx');
 var IconLinks = require('../../components/icon-links.jsx');
 var IconLink = require('../../components/icon-link.jsx');
 var Illustration = require('../../components/illustration.jsx');
 
-import { FormattedHTMLMessage } from 'react-intl';
+var EventsHeader = require('../../components/events/events-header.jsx');
+var EventsNav = require('../../components/events/events-nav.jsx');
 
 var EventsPage = React.createClass({
   contextTypes: {
@@ -19,43 +19,8 @@ var EventsPage = React.createClass({
   render: function() {
     return (
       <div>
-        <HeroUnit>
-          <h1>
-            {this.context.intl.formatMessage({id: 'join_maker_party'})}
-          </h1>
-          <h1>
-            {this.context.intl.formatMessage({id: 'make_a_diff'})}
-          </h1>
-          <div>
-            <a href="#" className="btn">
-              {this.context.intl.formatMessage({id: 'get_started'})}
-            </a>
-          </div>
-          <div>
-            <FormattedHTMLMessage
-              id="already_have_event"
-              values={{
-                login: "#"
-              }}
-            />
-          </div>
-        </HeroUnit>
-        <div className="inner-container">
-          <div className="mui-tab-switcher">
-            <div className="tabs">
-              <span className="btn active">
-                <Link to={"/" + this.context.intl.locale + "/pontoon/events"}>
-                  {this.context.intl.formatMessage({id: 'overview'})}
-                </Link>
-              </span>
-              <span className="btn">
-                <Link to={"/" + this.context.intl.locale + "/pontoon/events/resources"}>
-                  {this.context.intl.formatMessage({id: 'host_resources'})}
-                </Link>
-              </span>
-            </div>
-          </div>
-        </div>
+        <EventsHeader/>
+        <EventsNav/>
 
         <div className="inner-container">
           <section className="join-global-movement">
