@@ -6,6 +6,9 @@ var Tabulator = React.createClass({
       activeClass: "tab-0"
     };
   },
+  contextTypes: {
+    intl: React.PropTypes.object
+  },
   propTypes: {
     tabs: React.PropTypes.array
   },
@@ -17,6 +20,7 @@ var Tabulator = React.createClass({
   render: function() {
     var self = this;
     var className = "tabulator";
+    var formatMessage = this.context.intl.formatMessage;
 
     if (this.state.activeClass) {
       className += " " + this.state.activeClass;
@@ -35,7 +39,9 @@ var Tabulator = React.createClass({
             innerClassName += " tab-" + key;
 
             return (
-              <div onClick={onClick} className={innerClassName} key={key}>{section.head}</div>
+              <div onClick={onClick} className={innerClassName} key={key}>
+                {formatMessage({id: section.head})}
+              </div>
             );
           })}
         </div>
@@ -46,7 +52,9 @@ var Tabulator = React.createClass({
 
           return (
             <div key={key}>
-              <div className="tabulator-head-no-js">{section.head}</div>
+              <div className="tabulator-head-no-js">
+                {formatMessage({id: section.head})}
+              </div>
               <div className={innerClassName}>
                 <div className="tabulator-content">
                   {section.content}

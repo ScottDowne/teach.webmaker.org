@@ -55,10 +55,6 @@ var pages = {
   // NOTE: 'encryption' is reserved. See https://github.com/mozilla/learning.mozilla.org/issues/1798
   'events': require('../pages/events.jsx'),
   'events/resources': require('../pages/event-resources.jsx'),
-  // Pontoon links, to localize the page before we ship.
-  'pontoon/events': require('../pontoon-pages/events.jsx'),
-  'pontoon/events/resources': require('../pontoon-pages/event-resources.jsx'),
-
   'fixme': require('../pages/fixme.jsx'),
   'healthcheck': require('../pages/healthcheck.jsx'),
   'home': require('../pages/home.jsx'),
