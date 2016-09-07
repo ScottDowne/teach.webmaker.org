@@ -7,10 +7,7 @@ var Illustration = require('../../components/illustration.jsx');
 var EventsHeader = require('../../components/events/events-header.jsx');
 var EventsNav = require('../../components/events/events-nav.jsx');
 
-var Tabs = require('./tabs.jsx');
-
 var LogoAsset = require('./LogoAsset.jsx');
-var Tabulator = require('./Tabulator.jsx');
 
 var LogoAssetLink = require('./LogoAssetLink.jsx');
 var RemixLink = require('./RemixLink.jsx');
@@ -32,7 +29,7 @@ var EventsResources = React.createClass({
 
         <div className="inner-container">
           <section>
-            <h2>
+            <h2 className="text-center">
               {this.context.intl.formatMessage({id: 'host_maker_party'})}
             </h2>
             <p>
@@ -41,7 +38,7 @@ var EventsResources = React.createClass({
           </section>
 
           <section>
-            <h2>
+            <h2 className="text-center">
               {this.context.intl.formatMessage({id: 'maker_party_activities'})}
             </h2>
           </section>
@@ -98,13 +95,34 @@ var EventsResources = React.createClass({
           </section>
 
           <section>
-            <h2 id="event-details">
-              {this.context.intl.formatMessage({id: 'event_details'})}
+            <h2 className="text-center">
+              {this.context.intl.formatMessage({id: 'hosting_maker_party'})}
             </h2>
             <p>
-              {this.context.intl.formatMessage({id: 'maker_party_event_details'})}
+              {this.context.intl.formatMessage({id: 'maker_party_hosting_paragraph_1'})}
             </p>
-            <Tabulator tabs={Tabs}/>
+            <p>
+              {this.context.intl.formatMessage({id: 'maker_party_hosting_paragraph_2'})}
+            </p>
+            <ol>
+              <li>
+                {this.context.intl.formatMessage({id: 'hosting_list_1'})}
+              </li>
+              <li>
+                {this.context.intl.formatMessage({id: 'hosting_list_2'})}
+              </li>
+              <li>
+                {this.context.intl.formatMessage({id: 'hosting_list_3'})}
+              </li>
+              <li>
+                {this.context.intl.formatMessage({id: 'hosting_list_4'})}
+              </li>
+            </ol>
+            <div className="text-center">
+              <a href="#" className="btn">
+                {this.context.intl.formatMessage({id: 'get_host_pack'})}
+              </a>
+            </div>
           </section>
 
           <section>
@@ -217,15 +235,41 @@ var EventsResources = React.createClass({
 
           <div className="row full-row quote">
             <section>
-              <div className="text-center">
-                <p>
+              <div>
+                <h3 className="text-center">
                   {this.context.intl.formatMessage({id: 'become_maker_party_partner'})}
-                  <br/>
-                  {this.context.intl.formatMessage({id: 'maker_party_partner_paragraph'})}
-                </p>
-                <a href="#" className="btn">
-                  {this.context.intl.formatMessage({id: 'partner_with_us'})}
-                </a>
+                </h3>
+                <div className="row">
+                  <div className="col-sm-4 col-md-4 col-lg-4">
+                    <h4>
+                      {this.context.intl.formatMessage({id: 'partner_item_1_title'})}
+                    </h4>
+                    <p>
+                      {this.context.intl.formatMessage({id: 'partner_item_1_paragraph'})}
+                    </p>
+                  </div>
+                  <div className="col-sm-4 col-md-4 col-lg-4">
+                    <h4>
+                      {this.context.intl.formatMessage({id: 'partner_item_2_title'})}
+                    </h4>
+                    <p>
+                      {this.context.intl.formatMessage({id: 'partner_item_2_paragraph'})}
+                    </p>
+                  </div>
+                  <div className="col-sm-4 col-md-4 col-lg-4">
+                    <h4>
+                      {this.context.intl.formatMessage({id: 'partner_item_3_title'})}
+                    </h4>
+                    <p>
+                      {this.context.intl.formatMessage({id: 'partner_item_3_paragraph'})}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <a href="#" className="btn">
+                    {this.context.intl.formatMessage({id: 'partner_with_us'})}
+                  </a>
+                </div>
               </div>
             </section>
           </div>

@@ -30,7 +30,7 @@ var EventsPage = React.createClass({
             alt="Maker Party logo"
             className="content-first"
             >
-              <h2>
+              <h2 className="text-center">
                 {this.context.intl.formatMessage({id: 'what_is_maker_party'})}
               </h2>
               <p>
@@ -53,7 +53,7 @@ var EventsPage = React.createClass({
               src1x="/img/pages/events/maker-party-quote.png"
               alt="Maker Party logo"
             >
-              <h2>
+              <h2 className="text-center">
                 {this.context.intl.formatMessage({id: 'why_love_maker_party'})}
               </h2>
               <p>

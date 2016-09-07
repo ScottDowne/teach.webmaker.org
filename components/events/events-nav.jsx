@@ -11,10 +11,10 @@ var EventsNav = React.createClass({
       <div className="inner-container">
         <div className="mui-tab-switcher">
           <div className="tabs">
-            <Link className="btn" activeClassName="active" to={"/" + this.context.intl.locale + "/pontoon/events"}>
+            <Link className="btn" activeClassName="active" to={"/" + this.context.intl.locale + "/events"}>
               {this.context.intl.formatMessage({id: 'overview'})}
             </Link>
-            <Link className="btn" activeClassName="active" to={"/" + this.context.intl.locale + "/pontoon/events/resources"}>
+            <Link className="btn" activeClassName="active" to={"/" + this.context.intl.locale + "/events/resources"}>
               {this.context.intl.formatMessage({id: 'host_resources'})}
             </Link>
           </div>
