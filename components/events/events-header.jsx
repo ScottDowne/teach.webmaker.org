@@ -24,9 +24,6 @@ var EventsHeader = React.createClass({
         <div>
           <FormattedHTMLMessage
             id="already_have_event"
-            values={{
-              login: "#"
-            }}
           />
         </div>
       </HeroUnit>
