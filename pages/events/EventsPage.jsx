@@ -25,7 +25,7 @@ var EventsPage = React.createClass({
         <div className="inner-container">
           <section className="join-global-movement">
             <Illustration
-            height={183} width={156}
+            height={280} width={238}
             src1x="/img/pages/events/svg/maker-party-logo.svg"
             alt="Maker Party logo"
             className="content-first"
@@ -51,6 +51,7 @@ var EventsPage = React.createClass({
             <Illustration
               height={244} width={244}
               src1x="/img/pages/events/maker-party-quote.png"
+              src2x="/img/pages/events/maker-party-quote_2x.png"
               alt="Maker Party logo"
             >
               <h2 className="text-center">

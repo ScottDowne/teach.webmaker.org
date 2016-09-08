@@ -10,7 +10,6 @@ var EventsNav = require('../../components/events/events-nav.jsx');
 var LogoAsset = require('./LogoAsset.jsx');
 
 var LogoAssetLink = require('./LogoAssetLink.jsx');
-var RemixLink = require('./RemixLink.jsx');
 
 var EventsResources = React.createClass({
   contextTypes: {
@@ -47,6 +46,7 @@ var EventsResources = React.createClass({
             <Illustration
             height={183} width={250}
             src1x="/img/pages/events/meme.png"
+            src2x="/img/pages/events/meme_2x.png"
             alt="Maker Party logo"
             >
               <a href="#">
@@ -59,6 +59,7 @@ var EventsResources = React.createClass({
             <Illustration
             height={183} width={250}
             src1x="/img/pages/events/contribute.png"
+            src2x="/img/pages/events/contribute_2x.png"
             alt="Maker Party logo"
             >
               <a href="#">
@@ -71,6 +72,7 @@ var EventsResources = React.createClass({
             <Illustration
             height={183} width={250}
             src1x="/img/pages/events/hack.png"
+            src2x="/img/pages/events/hack_2x.png"
             alt="Maker Party logo"
             >
               <a href="#">
@@ -82,7 +84,8 @@ var EventsResources = React.createClass({
             </Illustration>
             <Illustration
             height={183} width={250}
-            src1x="/img/pages/events/hack.png"
+            src1x="/img/pages/events/dont-break.png"
+            src2x="/img/pages/events/dont-break_2x.png"
             alt="Maker Party logo"
             >
               <a href="#">
@@ -187,12 +190,6 @@ var EventsResources = React.createClass({
                   {this.context.intl.formatMessage({id: 'maker_party_size_5'})}
                 </LogoAssetLink>
               </LogoAsset>
-              <LogoAsset head={this.context.intl.formatMessage({id: 'certificate'})}
-              alt="Certificate Image"
-              src1x="/img/pages/event-resources/resource-thumbnails-08.png"
-              src2x="/img/pages/event-resources/resource-thumbnails-08@2x.png">
-                <RemixLink href="https://d157rqmxrxj6ey.cloudfront.net/mhasan/13029/ "/>
-              </LogoAsset>
               <LogoAsset head={this.context.intl.formatMessage({id: 'table_cloth_design'})}
               alt="Table Cloth Design Image"
               src1x="/img/pages/event-resources/resource-thumbnails-04.png"
@@ -213,20 +210,6 @@ var EventsResources = React.createClass({
                 </LogoAssetLink>
                 <LogoAssetLink href="https://stuff.webmaker.org/teach.mozilla.org/MakerPartyButtons.png">
                   {this.context.intl.formatMessage({id: 'download_png'})}
-                </LogoAssetLink>
-              </LogoAsset>
-              <LogoAsset head={this.context.intl.formatMessage({id: 'paper_toy'})}
-              alt="KUMI Papertoy Image"
-              src1x="/img/pages/event-resources/resource-thumbnails-09.png"
-              src2x="/img/pages/event-resources/resource-thumbnails-09@2x.png">
-                <LogoAssetLink href="https://stuff.webmaker.org/teach.mozilla.org/KUMI-Papertoy-yellow.pdf">
-                  {this.context.intl.formatMessage({id: 't_shirt_yellow'})}
-                </LogoAssetLink>
-                <LogoAssetLink href="https://stuff.webmaker.org/teach.mozilla.org/KUMI-Papertoy-blue.pdf">
-                  {this.context.intl.formatMessage({id: 't_shirt_teal'})}
-                </LogoAssetLink>
-                <LogoAssetLink href="https://stuff.webmaker.org/teach.mozilla.org/KUMI-Papertoy-blank-tees.pdf">
-                  {this.context.intl.formatMessage({id: 't_shirt_design'})}
                 </LogoAssetLink>
               </LogoAsset>
             </div>
